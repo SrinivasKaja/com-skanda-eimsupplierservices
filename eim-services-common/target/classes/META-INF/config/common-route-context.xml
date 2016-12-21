@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- Audit camel route context declaration -->
+	<camel:routeContext id="commonRouteContext">
+		<camel:route id="commonErrorMessageSender">
+			<camel:description>Common route to send error message
+			</camel:description>
+			<camel:from uri="direct:errorResponseSender" />
+			<camel:to uri="bean:commonErrorProcessor?method=processErrorResponse" />
+			<!-- check if soap -->
+			<camel:choice>
+				<camel:when>
+					<camel:simple>${property.WsType} == 'SOAP'</camel:simple>
+					<camel:setFaultBody>
+						<camel:simple>${in.body}</camel:simple>
+					</camel:setFaultBody>
+				</camel:when>
+			</camel:choice>
+			<camel:filter>
+				<camel:simple>${property.contentType} == 'application/json' || ${header.content-type} == 'application/json'
+				|| ${header.accept} == 'application/json'
+				</camel:simple>
+				<camel:log message="Camel Simple json Body " logName="com.eim" />
+				<camel:setHeader headerName="content-type">
+					<camel:simple>application/json</camel:simple>
+				</camel:setHeader>
+				<camel:marshal ref="jackSupplierDataFormatter" />
+			</camel:filter>
+		</camel:route>
+
+		<camel:route id="setContentTypeBasedOnInput">
+			<camel:from uri="direct:setContentTypeBasedOnInput" />
+			<camel:filter>
+				<camel:simple>${header.content-type} == 'application/json' ||
+					${header.accept} == 'application/json'
+				</camel:simple>
+				<camel:setProperty propertyName="contentType">
+					<camel:constant>application/json</camel:constant>
+				</camel:setProperty>
+				<camel:log
+					message="setContentTypeBasedOnInput -  header -  ${header.content-type} "
+					logName="com.eim" />
+			</camel:filter>
+		</camel:route>
+
+		<!-- Common route to remove blank tags from request/response XML -->
+		<camel:route id="blankTagRemovalRoute">
+			<camel:description>Remove Blank Tags from generated request/response
+			</camel:description>
+			<camel:from uri="direct:removeBlankTags" />
+			<camel:log message="Before transform - ${body}" logName="com.eim" />
+			<camel:to uri="xslt:META-INF/xslt/EmptyTagRemover.xsl" />
+		</camel:route>
+
+<!-- 		<camel:route id="authenticationRoute">
+			<camel:description>Route for authenticate user and password
+			</camel:description>
+			<camel:from uri="direct:authenticateCredentials" />
+			<camel:process ref="authenticationValidator" />
+			<camel:choice>
+				<camel:when>
+					<camel:simple>${header.accessCode} == 'false'</camel:simple>
+					<camel:throwException ref="processException" />
+				</camel:when>
+			</camel:choice>
+		</camel:route>
+ -->	</camel:routeContext>
+
+	<bean id="jaxbfaultresponse" class="org.apache.camel.model.dataformat.JaxbDataFormat">
+		<property name="prettyPrint" value="false" />
+		<property name="contextPath"
+			value="com.eim.common.datatypes.messagefault" />
+	</bean>
+
+	<bean id="processException" class="com.eim.common.exception.EIMProcessException">
+		<constructor-arg value="${err.authentication.failure}"
+			type="java.lang.String"></constructor-arg>
+	</bean>
+</beans>

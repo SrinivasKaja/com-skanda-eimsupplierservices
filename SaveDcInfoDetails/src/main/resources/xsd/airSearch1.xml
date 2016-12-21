@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pfx:AirLowFareSearchRQ xmlns:pfx="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/ airSearch.xsd ">
+  <pfx:requesterDetails>
+    <pfx:requestId>pfx:requestId</pfx:requestId>
+    <pfx:sessionID>pfx:sessionID</pfx:sessionID>
+    <pfx:appID>pfx:appID</pfx:appID>
+    <pfx:userName>pfx:userName</pfx:userName>
+    <pfx:requesterType>pfx:requesterType</pfx:requesterType>
+    <pfx:pseudoCityCode>pfx:pseudoCityCode</pfx:pseudoCityCode>
+    <pfx:companyName>pfx:companyName</pfx:companyName>
+  </pfx:requesterDetails>
+  <pfx:originDestinationInformation>
+    <pfx:departureDateTime>pfx:departureDateTime</pfx:departureDateTime>
+    <pfx:arrivalDateTime>pfx:arrivalDateTime</pfx:arrivalDateTime>
+    <pfx:departureWindow>pfx:departureWindow</pfx:departureWindow>
+    <pfx:arrivalWindow>pfx:arrivalWindow</pfx:arrivalWindow>
+    <pfx:originLocation>pfx:originLocation</pfx:originLocation>
+    <pfx:destinationLocation>pfx:destinationLocation</pfx:destinationLocation>
+    <pfx:originAirportCode>pfx:originAirportCode</pfx:originAirportCode>
+    <pfx:destinationAirportCode>pfx:destinationAirportCode</pfx:destinationAirportCode>
+  </pfx:originDestinationInformation>
+  <pfx:travelPreferences>
+    <pfx:flightTypePref>pfx:flightTypePref</pfx:flightTypePref>
+    <pfx:cabinPref>pfx:cabinPref</pfx:cabinPref>
+    <pfx:eTicketDesired>pfx:eTicketDesired</pfx:eTicketDesired>
+    <pfx:validInterlineTicket>pfx:validInterlineTicket</pfx:validInterlineTicket>
+    <pfx:xoFares>pfx:xoFares</pfx:xoFares>
+  </pfx:travelPreferences>
+  <pfx:travelerInfoSummary>
+    <pfx:seatsRequested>pfx:seatsRequested</pfx:seatsRequested>
+    <pfx:passengerTypeQuantity>pfx:passengerTypeQuantity</pfx:passengerTypeQuantity>
+    <pfx:pricePriority>pfx:pricePriority</pfx:pricePriority>
+    <pfx:directFlightsPriority>pfx:directFlightsPriority</pfx:directFlightsPriority>
+    <pfx:timePriority>pfx:timePriority</pfx:timePriority>
+    <pfx:vendorPriority>pfx:vendorPriority</pfx:vendorPriority>
+    <pfx:specificPTC_Indicator>pfx:specificPTC_Indicator</pfx:specificPTC_Indicator>
+  </pfx:travelerInfoSummary>
+  <pfx:tpaextensions>
+    <pfx:validatingCarrierCode>pfx:validatingCarrierCode</pfx:validatingCarrierCode>
+    <pfx:eTicket>pfx:eTicket</pfx:eTicket>
+  </pfx:tpaextensions>
+</pfx:AirLowFareSearchRQ>

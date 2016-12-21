@@ -1,0 +1,11 @@
+<jxb:bindings version="2.1" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	jxb:extensionBindingPrefixes="xjc" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:com.fnf="http://www.fnf.com/xes">
+
+	<!-- Customize the package name that is generated for each schema. -->
+	<jxb:bindings schemaLocation="../xsd/airSearch.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="com.skandha.eim.air.jaxb.v1" />
+		</jxb:schemaBindings>
+	</jxb:bindings>
+</jxb:bindings>
+

@@ -1,0 +1,9 @@
+Hi,
+ 
+Please note the processing summary for ${exchange.properties.CamelFileExchangeFile}:
+Total Records:    ${exchange.properties.TOTAL_COUNT}
+Success:          ${exchange.properties.SUCCESS_COUNT}
+Failure:          ${exchange.properties.FAILURE_COUNT}
+
+Regards,
+Automated Monitoring

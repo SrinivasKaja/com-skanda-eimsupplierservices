@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<mapping map-null="false">
+		<class-a>com.eim.crud.jaxb.v1.SupplierContractDCDetail</class-a>	
+		<class-b>com.eim.db.entity.DcFreightCrudEntity</class-b>
+		<field>
+			<a>legacySupplierID</a>
+			<b>legacySupplierId</b>
+		</field>
+		<field>
+			<a>countryCode</a>
+			<b>countryCode</b>
+		</field>
+		<field>
+			<a>departmentNumber</a>
+			<b>deptNumber</b>
+		</field>
+		<field>
+			<a>seqNumber</a>
+			<b>sequenceNumber</b>
+		</field>
+		<field>
+			<a>nodeId</a>
+			<b>dcNumber</b>
+		</field>
+		<field>
+			<a>billingType.code</a>
+			<b>supplierFreightBillingTypeCode</b>
+		</field>
+		<field>
+			<a>deliveryMethod.code</a>
+			<b>supplierTransportMethodCode</b>
+		</field>
+		<field>
+			<a>transportationType.code</a>
+			<b>supplierTransportTypeCode</b>
+		</field>
+		<field>
+			<a>warehouseArea.code</a>
+			<b>shipmentWHSELocationCode</b>
+		</field>
+		<field>
+			<a>consolidatorBillingType.code</a>
+			<b>poMessageCode</b>
+		</field>
+		<field>
+			<a>palletTerm.code</a>
+			<b>shipmentLoadTypeCode</b>
+		</field>
+		<field >
+			<a>effectiveDate</a>
+			<b>this</b>
+		</field>
+		<field>
+			<a>lastUpdateUserId</a>
+			<b>lastUpdatedUserId</b>
+		</field>
+		<field>
+			<a>lastUpdateTimestamp</a>
+			<b>this</b>
+		</field>
+		<field>
+			<a get-method="isIsNewDC" is-accessible="true">isNewDC</a>
+			<b is-accessible="true">isNewDc</b>
+		</field>
+	</mapping>
+	
+</mappings>

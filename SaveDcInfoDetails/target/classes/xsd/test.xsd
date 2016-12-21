@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	targetNamespace="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/"
+	xmlns:pfx="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/"
+	elementFormDefault="qualified" attributeFormDefault="qualified">
+
+	<xs:complexType name="RequesterDetails">
+		<xs:sequence>
+			<xs:element name="requestId" type="xs:string" minOccurs="0" />
+			<xs:element name="sessionID" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AirLowFareSearchRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="requesterDetails" type="pfx:RequesterDetails"
+					minOccurs="0" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

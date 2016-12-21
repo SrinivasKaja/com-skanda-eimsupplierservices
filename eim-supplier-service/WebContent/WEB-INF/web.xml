@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>SupplierSearchServices</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:config/application.xml</param-value>
+	</context-param>
+	 <listener> <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+		</listener> 
+
+	<!-- to setup Camel Servlet -->
+	<servlet>
+		<display-name>Camel Http Transport Servlet</display-name>
+		<servlet-name>CamelServlet</servlet-name>
+		<servlet-class>org.apache.camel.component.servlet.CamelHttpTransportServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- START SNIPPET: e1 -->
+	<!-- to setup Camel Swagger API servlet -->
+	<servlet>
+		<servlet-name>ApiDeclarationServlet</servlet-name>
+		<servlet-class>org.apache.camel.component.swagger.spring.SpringRestSwaggerApiDeclarationServlet</servlet-class>
+		<init-param>
+			<!-- we specify the base.path using relative notation, that means the 
+				actual path will be calculated at runtime as http://server:port/contextpath/rest -->
+			<!-- This path will be replaced during init. Need some clean up in code 
+				and robustness -->
+			<param-name>base.path</param-name>
+			<param-value>http://localhost:8080/eimsupplierdcsservices</param-value>
+		</init-param>
+		<init-param>
+			<!-- we specify the api.path using relative notation, that means the actual 
+				path will be calculated at runtime as http://server:port/contextpath/api-docs -->
+			<param-name>api.path</param-name>
+			<param-value>api-docs</param-value>
+		</init-param>
+		<init-param>
+			<param-name>api.version</param-name>
+			<param-value>1.2.3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>api.title</param-name>
+			<param-value>User Services</param-value>
+		</init-param>
+		<init-param>
+			<param-name>api.description</param-name>
+			<param-value>Camel Rest Example with Swagger that provides an User
+					REST service</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<!-- swagger API declaration -->
+	<servlet-mapping>
+		<servlet-name>ApiDeclarationServlet</servlet-name>
+		<url-pattern>/api-docs/*</url-pattern>
+	</servlet-mapping>
+	<!-- END SNIPPET: e1 -->
+
+	<!-- define that URL path for the Camel Servlet to use -->
+	<servlet-mapping>
+		<servlet-name>CamelServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- START SNIPPET: e2 -->
+	<!-- enable CORS filter so people can use swagger UI to browse and test 
+		the APIs -->
+	<filter>
+		<filter-name>RestSwaggerCorsFilter</filter-name>
+		<filter-class>org.apache.camel.component.swagger.RestSwaggerCorsFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>RestSwaggerCorsFilter</filter-name>
+		<url-pattern>/api-docs/*</url-pattern>
+		<url-pattern>/v0/*</url-pattern>
+		<url-pattern>/v1/*</url-pattern>
+	</filter-mapping>
+</web-app>

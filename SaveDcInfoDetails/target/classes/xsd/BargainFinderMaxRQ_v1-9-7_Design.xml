@@ -1,0 +1,865 @@
+<!--Mandatory-->
+<!--Repeat Factor=1-->
+<!--Request root element-->
+<!--ResponseType, specify type of the response, valid values: "OTA" - regular OTA response, "GIR" - Grouped Itinerary Response-->
+<!--ResponseVersion, specify response version, for OTA ResponseType use "1.9.7", for GIR ResponseType use "2016Q3.0". 
+	Warning message will be returned if deprecated version of response is used.-->
+<!--"Version" (required) Version of the service (use 1.9.7).-->
+<!--"AvailableFlightsOnly" (optional) Indicator for whether to consider the availability of the corresponding booking codes.-->
+<!--AvailableFlightsOnly="true" (default) Returns fares considering the availability of the corresponding booking codes.-->
+<!--AvailableFlightsOnly="false" Returns fares without regard to the availability of the corresponding booking codes.-->
+<OTA_AirLowFareSearchRQ ResponseType="OTA" ResponseVersion="1.9.7" Version="1.9.7" AvailableFlightsOnly="true" xmlns="http://www.opentravel.org/OTA/2003/05">
+	<!--Mandatory-->
+	<!--Repeat Factor=1-->
+	<POS>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--"PseudoCityCode" (required) Four-character pseudo city code (PCC).-->
+		<Source PseudoCityCode="YOUR_PCC_HERE">
+			<!--Mandatory-->
+			<!--Repeat Factor=1-->
+			<!--"ID" (required) Not used for processing. Use a value of "1".-->
+			<!--"Type" (required) Not used for processing. Use a value of "1".-->
+			<RequestorID ID="1" Type="1">
+				<!--Mandatory-->
+				<!--Repeat Factor=1-->
+				<!--"Code" (required) Customer code. Use the value "TN".-->
+				<CompanyName Code="TN"/>
+			</RequestorID>
+		</Source>
+	</POS>
+	<!--Mandatory-->
+	<!--Repeat Factor=1-10-->
+	<!--"RPH" (required) Order of Origin Destination information -->
+	<OriginDestinationInformation RPH="1">
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--Date and time of departure-->
+		<!--Do not use it together with ArrivalDateTime -->
+		<DepartureDateTime>2009-12-25T06:00:00</DepartureDateTime>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--Date and time of arrival-->
+		<!--Do not use it together with DepartureDateTime -->
+		<ArrivalDateTime>2009-12-25T06:00:00</ArrivalDateTime>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--Time range for departure (in HHMMHHMM format), for example, to specify a departure time range of 9:00 to 11:00 a.m., the value is 09001100.-->
+		<DepartureWindow>05000730</DepartureWindow>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--Time range for arrival (in HHMMHHMM format), for example, to specify an arrival time range of 4:00 to 8:00 p.m., the value is 16002000.-->
+		<ArrivalWindow>16002000</ArrivalWindow>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--"LocationCode" (required) Three-character airport code for the departure location.-->
+		<OriginLocation LocationCode="LHR"/>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--"LocationCode" (required) Three-character airport code for the arrival location.-->
+		<DestinationLocation LocationCode="FRA"/>
+		<!--Optional -->
+		<!--RepeatFactor=0-1 -->
+		<!--One or more locations on which connection should take place -->
+		<!--LocationCode- airport or city code on which connection should take place-->
+		<ConnectionLocations>
+			<ConnectionLocation LocationCode="ATL">String</ConnectionLocation>
+		</ConnectionLocations>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<TPA_Extensions>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--Definition of a routing-->
+			<!--AddWildcards (optional). If true, wildcards will be automatically inserted between each two leg (RoutingLeg) elements. Will be set to 'false' if not present.-->
+			<Routing AddWildcards="false">
+				<!--Mandatory-->
+				<!--Repeat Factor=1-unlimited-->
+				<!--Definition of individual routing legs, at least one leg must be present-->
+				<RoutingLeg>
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--"InboundCarrier" Two or three character airline code, wildcard character "\*" is allowed-->
+					<InboundCarrier>BA</InboundCarrier>
+					<!--Asterisk (*): "any" (zero or more) carrier -->
+					<InboundCarrier>*</InboundCarrier>
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--"ConnectPoint" Three to Five character airport code, wildcard character "*" "?" "+" "." are allowed -->
+					<!--Asterisk (*): "any" (zero or more) connection.-->
+					<!--Question mark (?): "zero or one" connection.-->
+					<!--Dot (.): "one and only one" connection.-->
+					<!--Plus (+): "one or more" connections.-->
+					<ConnectPoint>DXB</ConnectPoint>
+				</RoutingLeg>
+			</Routing>
+			<!--Optional-->
+			<!--Repeat Factor=0-20-->
+			<!--Cannot combine with SisterDestinationMileage.-->
+			<!--"LocationCode" (required) Three-character airport code for an alternate destination location (although schema is allowing twenty alternate locations, internal limitation is set to four). This alternate location applies to the current leg/segment only. To specify global alternate cities, see the AlternateAirportCities element.-->
+			<SisterDestinationLocation LocationCode="MON"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Cannot combine with SisterDestinationLocation.-->
+			<!--"Number" (required) Mileage radius range to search for alternate airports for the destination in this leg/segment.-->
+			<SisterDestinationMileage Number="50"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-20-->
+			<!--Cannot combine with SisterOriginMileage.-->
+			<!--"LocationCode" (required) Three-character airport code for an alternate destination location (although schema is allowing twenty alternate locations, internal limitation is set to four). This alternate location applies to the current leg/segment only. To specify global alternate cities, see the AlternateAirportCities element.-->
+			<SisterOriginLocation LocationCode="GLA"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Cannot combine with SisterOriginLocation.-->
+			<!--"Number" (required) Mileage radius range to search for alternate airports for the origin in this leg/segment.-->
+			<SisterOriginMileage Number="10"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Code" (optional) Connection, stopover, or unknown arrival (ARUNK).-->
+			<!--Code="X" Connection.-->
+			<!--Code="O" Stopover.-->
+			<!--Code="ARUNK" Unknown arrival (ARUNK) segment.-->
+			<SegmentType Code="O"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"PlusMinus" (optional) Plus and minus time (in hours) for departure or arrival. Only values from 0 to 9 are allowed.-->
+			<!-- "Minus" (Optional) Minus time (in hours) for departure or arrival. Valid values are: 0 through 72.-->
+			<AlternateTime PlusMinus="2"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Defines preferred cabin to be used in a search for this leg level (if SegmentType is "O") or segment (if SegmentType is "X"). -->
+			<!--The cabin type specified in this element will override the cabin type specified -->
+			<!--at the request level for this leg/segment. If a cabin type is not specified for this element -->
+			<!--the cabin type at request level will be used as default for this leg or segment. -->
+			<!--If the cabin type is not specified at both the leg/segment level and request level -->
+			<!-- a default cabin of "Economy" will be used. -->
+			<!--"Cabin" (optional) Cabin for this leg or segment.-->
+			<!--Cabin="P" or Cabin="PremiumFirst" is a Premium First class cabin.-->
+			<!--Cabin="F" or Cabin="First" is a First class cabin.-->
+			<!--Cabin="J" or Cabin="PremiumBusiness" is a Premium Business class cabin.-->
+			<!--Cabin="C" or Cabin="Business" is a Business class cabin.-->
+			<!--Cabin="S" or Cabin="PremiumEconomy" is a Premium Economy class cabin.-->
+			<!--Cabin="Y" or Cabin="Economy" is a Economy class cabin.-->
+			<!--"PreferLevel" (optional) Indicator for whether the cabin is preferred.-->
+			<CabinPref PreferLevel="Preferred" Cabin="Y"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Max" (optional) indicates the maximum connection time (in minutes) between segments.-->
+			<!--"Min" (optional)  indicates the minimum connection time (in minutes) between segments.-->
+			<!--EnableExcludedConnection (optional) Enable excluded connection time (default: true)-->
+			<!--ExcludedConnectionBegin (optional) Excluded connection time begin in format HHMM-->
+			<!--ExcludedConnectionEnd (optional) Excluded connection time end in format HHMM-->
+			<ConnectionTime Min="480" Max="900" ExcludedConnectionBegin="2200" ExcludedConnectionEnd="0100" EnableExcludedConnection="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--Consider only the specified carriers for this leg.-->
+			<!--"Code" (required) Two-character carrier code.-->
+			<!--Cannot combine IncludeVendorPref with TravelPreferences/VendorPref.-->
+			<IncludeVendorPref Code="AA"/>
+			<IncludeVendorPref Code="AS"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--Consider only these alliances.-->
+			<!--Code (required) Identifies an alliance by the alliance code.-->
+			<IncludeAlliancePref Code="AA"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Total travel time settings-->
+			<!--Min (optional)-->
+			<!--Max (optional)-->
+			<TotalTravelTime Min="480" Max="1200"/>
+		</TPA_Extensions>
+	</OriginDestinationInformation>
+	<!--Optional-->
+	<!--Repeat Factor=0-1-->
+	<!--"ValidInterlineTicket" (optional) If present, will validate options on base of interline ticketing agreement.-->
+	<!--ValidInterlineTicket="true" Return only options with valid interline ticketing agreement.-->
+	<!--ValidInterlineTicket="false" Return both options with and without valid interline ticketing agreement. Mark each option whether it has interline ticketing agreement or not.-->
+	<!--"MaxStopsQuantity" (optional) indicates the max number of stops requested in each leg. Itineraries with more stops than the specified value will not be returned. When specified, it disables the FlightTypePref@MaxConnections option.-->
+	<!--"ETicketDesired" (optional), Request flights that are e-ticketable in the response.-->
+	<!--"Hybrid" (optional), If set to "true", returned shopping results will contain hybrid carriers content, if available on the market.-->
+	<TravelPreferences ValidInterlineTicket="false" MaxStopsQuantity="2" Hybrid="true">
+		<!--Optional-->
+		<!--Repeat Factor=0-unlimited-->
+		<!--"Code" (required) Indicator for whether to request a carrier code.-->
+		<!--"PreferLevel" (required) Indicator for whether the carrier is preferred or not preferred.-->
+		<!--PreferLevel="Only" Only the specified carrier is requested.-->
+		<!--PreferLevel="Unacceptable" Specified carrier is unacceptable.-->
+		<!--PreferLevel="Preferred" Specified carrier is preferred.-->
+		<!--Cannot combine VendorPref with OriginDestinationInformation/TPA_Extensions/IncludeVendorPref or TravelPreferences/TPA_Extensions/ExcludeVendorPref.-->
+		<VendorPref Code="BA" PreferLevel="Preferred"/>
+		<!--Optional-->
+		<!--Repeat Factor=0-3-->
+		<!--Although up to 3 elements are allowed only one is considered in processing (it is recommended to use only one occurrence of FlightTypePref)-->
+		<!--"MaxConnections" (optional) Maximum number of connections requested in each leg. Itineraries with more connections than the specified value will not be returned.-->
+		<FlightTypePref MaxConnections="1"/>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--"Cabin" (optional) Cabin for this leg or segment.-->
+		<!--Cabin="P" or Cabin="PremiumFirst" is a Premium First class cabin.-->
+		<!--Cabin="F" or Cabin="First" is a First class cabin.-->
+		<!--Cabin="J" or Cabin="PremiumBusiness" is a Premium Business class cabin.-->
+		<!--Cabin="C" or Cabin="Business" is a Business class cabin.-->
+		<!--Cabin="S" or Cabin="PremiumEconomy" is a Premium Economy class cabin.-->
+		<!--Cabin="Y" or Cabin="Economy" is a Economy class cabin.-->
+		<!--"PreferLevel" (optional) Indicator for whether the cabin is preferred.-->
+		<CabinPref PreferLevel="Preferred" Cabin="Y"/>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<TPA_Extensions>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--"Code" (required) Two-character carrier code.-->
+			<!--Cannot combine ExcludeVendorPref with TravelPreferences/VendorPref.-->
+			<ExcludeVendorPref Code="XX"/>
+			<ExcludeVendorPref Code="YY"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--Consider only these alliances.-->
+			<!--Code (required) Identifies an alliance by the alliance code.-->
+			<IncludeAlliancePref Code="AA"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--Do not consider these alliances.-->
+			<!--Code (required) Identifies an alliance by the alliance code.-->
+			<ExcludeAlliancePref Code="BB"/>
+			<!--Optional-->
+			<!--Repeat Factor=0..1-->
+			<!--NumTrips, This element allows a user to specify the number of itineraries returned. Default 9, minimum 1-->
+			<!--Number (optional), Default 9, minimum 1 -->
+			<NumTrips Number="19"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Number" (Optional) Minimum  value is 1, default 5.-->
+			<!--This element allows a user to specify the number of itineraries with special routing returned. Minimum  value is 1, default 5-->
+			<NumTripsWithRouting Number="10"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Ind" A value of "true" returns only online itineraries.-->
+			<OnlineIndicator Ind="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Value" (optional) Type of trip.-->
+			<!--Value="OneWay" One-way trip.-->
+			<!--Value="Return" (default) Round-trip.-->
+			<!--Value="Circle" Circle trip.-->
+			<!--Value="OpenJaw" Open jaw trip.-->
+			<!--Value="Other" Complex trip.-->
+			<TripType Value="Return"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Change minimum connect time per connection in long connection schedules if Long Connect Time logic is enabled.-->
+			<!--"Min" (optional) minimum connect time in minutes per connection in long connection schedules, default is 780.-->
+			<!--"Max" (optional) maximum connect time in minutes per connection in long connection schedules, default is 1439.-->
+			<!--"Enable" (optional) enable long connection schedules .-->
+			<LongConnectTime Min="780" Max="1200" Enable="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Minimum and maximum number of connection points for Long Connections.-->
+			<!--"Min" (optional) -->
+			<!--"Max" (optional) -->
+			<LongConnectPoints Min="2" Max="3"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Value" (required) Indicator for whether to return only fares with a passenger type the same as the passenger type specified in the request.-->
+			<!--Value="true" Returns only fares with a passenger type the same as the passenger type specified in the request.-->
+			<!--Value="false" (default) Uses standard Bargain Finder Max logic.-->
+			<XOFares Value="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Exempts all taxes (TE).-->
+			<!--"Value" (required) Indicator for whether to exempt all taxes and include applicable fees and passenger facility charges (PFCs).-->
+			<!--Cannot combine ExemptAllTaxes with ExemptAllTaxesAndFees, Taxes, and ExemptTax.-->
+			<ExemptAllTaxes Value="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Exempts all taxes and fees (TN).-->
+			<!--"Value" (required) Indicator for whether to exempt all taxes and fees and include applicable passenger facility charges (PFCs).-->
+			<!--Cannot combine ExemptAllTaxesAndFees with ExemptAllTaxes, Taxes, and ExemptTax.-->
+			<ExemptAllTaxesAndFees Value="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Specify Taxes (TX).-->
+			<!--Cannot combine Taxes with ExemptAllTaxes, ExemptAllTaxesAndFees, and ExemptTax.-->
+			<Taxes>
+				<!--Optional-->
+				<!--Repeat Factor=0-unlimited-->
+				<!--Exempts all taxes and fees, includes the applicable passenger facility charges (PFCs), and adds a specific tax.-->
+				<!--"TaxCode" (required) Code for the tax you want to add.-->
+				<!--"Amount" (required) Monetary amount of the specified tax.-->
+				<!--Cannot combine Taxes with ExemptAllTaxes, ExemptAllTaxesAndFees, and ExemptTax.-->
+				<Tax TaxCode="1A1" Amount="12"/>
+				<Tax TaxCode="2B2" Amount="21.99"/>
+			</Taxes>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--Exempt Tax (TE) will exempt a specific tax.-->
+			<!--"TaxCode" (required) Code for the tax you want to exempt.-->
+			<!--Cannot combine ExemptTax with ExemptAllTaxes, ExemptAllTaxesAndFees, and Taxes.-->
+			<ExemptTax TaxCode="1A1"/>
+			<ExemptTax TaxCode="2B2"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Value" (required) Indicator for whether to treat all flight stops as connections.-->
+			<!--Value="true" FightStopsAsConnections used with TravelPreferences/FlightTypePref@MaxConnections will treat all stops as connections.-->
+			<!--Value="false" (default) Will not treat stops as connections.-->
+			<FlightStopsAsConnections Ind="true"/>
+			<!--Optional-->
+			<!--Controls if response could contain options with cabin class different than requested -->
+			<!--Jump Cabin cannot be fully disabled. For two- and more- segment solutions where at least one segment offers preferred cabin, jump cabin will be performed for the segment where preferred cabin is not offered but the lower cabin is offered and available.-->
+			<!--Disabled="true/false" required -->
+			<JumpCabinLogic Disabled="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Set to "true" guarantees that all segments within single shopping option belong to the requested cabin. When KeepSameCabin Enabled = "true" is used in conjunction with JumpCabinLogic Disabled ="true", KeepSameCabin overrides JumpCabin parameter. -->
+			<KeepSameCabin Enabled="true"/>
+			<!--Optional-->
+			<!--Settings specific to Sum of Locals processing-->
+			<!--Enable Sum of Locals processing-->
+			<!--NOT USED BY BFM-->
+			<!--Enable="true/false" required, default is false -->
+			<TicketingSumOfLocals Enable="true"/>
+			<!--Optional-->
+			<!--Airline Carrier Code - override the GOVERNING CARRIER to get the fare filed by that carrier-->
+			<!--AirlineCode="airline_code" required -->
+			<GoverningCarrierOverride AirlineCode="Airline Code Goes Here"/>
+			<!--Optional-->
+			<!--Force DSF to return schedules only for carriers bookable by Sabre-->
+			<!--Enabled="true/false" required -->
+			<ExcludeCallDirectCarriers Enabled="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Validating Carrier code-->
+			<ValidatingCarrier Code="XX">
+				<!--Optional-->
+				<!--Repeat Factor=0-unlimited-->
+				<Preference Code="XX" Level="Unacceptable"/>
+			</ValidatingCarrier>
+			<!--Optional-->
+			<!--RepeatFactor=0-1-->
+			<!--Enables to override local Settlement Method validation and Inteline Agreement validation -->
+			<ValidatingCarrierCheck>
+				<!--Required-->
+				<!--RepeatFactor=1-->
+				<!--Ind (Required)- Set to "False" disables settlement method validation for local Point Of Sale -->
+				<SettlementValidation Ind="false"/>
+				<!--Required-->
+				<!--RepeatFactor=1 -->
+				<!--Ind (Required)- Set to "False" disables interline agreement validation for validating carriers. Set to”true” along with SettlementValidation set to “false” and at least one Country Code specified will trigger the responses with no settlement validation performed on Validating Carriers returned but with IET validation performed in the specified countries-->
+				<IETValidation Ind="true"/>
+				<!--Optional -->
+				<!--RepeatFactor=0-unlimited -->
+				<!--Code- enables specifying the carrier code(s) for which no settlement method validation should be done outside of Point Of Sale country. If carrier code is not indicated in the request then no settlement validation applies for all carriers. -->
+				<Carrier Code="BA"/>
+				<!--Optional -->
+				<!--RepeatFactor=0-unlimited -->
+				<!--Code- enables specifying the country code for which interline agreement validation should be made outside of Point Of Sale country. At least one country code must be provided if IETValidation/@Ind is set to “true”.-->
+				<Country Code="DE"/>
+			</ValidatingCarrierCheck>
+			<!--Optional-->
+			<!--Overrides settlement method. This element provides users with ability to override the default settlement method selected (based on Agency’s POS or settlement method hierarchy).-->
+			<!--Invalid settlement method will return an error "INVALID SETTLEMENT METHOD" or "INVALID SETTLEMENT METHOD FOR POINT OF SALE".-->
+			<!--Supported codes for settlement method: BSP, ARC, TCH, GEN (Generic TAT), RUT (Russian TAT), PRT (Philippines TAT), SAT (SATA), KRY (Killroy).-->
+			<SettlementMethod>ARC</SettlementMethod>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Elements to enable Flexible Fares logic-->
+			<FlexibleFares>
+				<!--Optional-->
+				<!--Repeat Factor=1-10-->
+				<!--This element specifies parameters for desired fare.-->
+				<FareParameters>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Setting this to true means the same as setting ResTicketing, MinMaxStay and RefundPenalty to false.-->
+					<!--Attribute "Int" (required), allowed values "true" or "false"-->
+					<ExcludeRestricted Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--If set to true, fares that have a reservation/ticketing can be included in the responses. If set to false, then no fares that include reservation/ticketing requirement will be included in the response. This is negation of XA qualifier.-->
+					<!--Attribute "Int" (required), allowed values "true" or "false"-->
+					<ResTicketing Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--If set to true, fares that have a min/max stay can be included in the responses. If set to false, then no fares that include a min/max stay requirement will be included in the response. This is negation of XS qualifier. -->
+					<!--Attribute "Int" (required), allowed values "true" or "false"-->
+					<MinMaxStay Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--If set to true, fares that have a refund penalty can be included in the responses. If set to false, then no fares that include a refund penalty requirement will be included in the response. This is negation of XP qualifier. -->
+					<!--Attribute "Int" (required), allowed values "true" or "false"-->
+					<RefundPenalty Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--This element finds only public fares. -->
+					<!--Attribute "Int" (required), allowed values "true" or "false"-->
+					<PublicFare Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--This element finds only private fares. -->
+					<!--Attribute "Int" (required), allowed values "true" or "false"-->
+					<PrivateFare Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--This element specifies preferred cabin type. -->
+					<!--Attribute "Type" (required), cabin is either Premium First (P), First (F), Premium Business (J), Business (C), Premium Economy (S) or Economy (Y)-->
+					<Cabin Type="PremiumFirst"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--This element specifies PTC used to find this fare. -->
+					<!--Attribute "Code" (required), specify traveler type code. -->
+					<PassengerType Code="String"/>
+					<!--Optional-->
+					<!--RepeatFactor=0-1-->
+					<!--Ind (required)- If set to true then returned fares need to match AcccountCode/CorpID specified in Fare Group definition on all fare components. Applicable only if account code or corporate id provided in the request.-->
+					<NegotiatedFaresOnly Ind="true"/>
+					<!--Optional -->
+					<!--RepeatFactor=0-1 -->
+					<!--Ind (required)- if set to 'true' only fares matching requested passenger type will be returned -->
+					<XOFares Ind="true"/>
+					<!--Optional -->
+					<!--RepeatFactor=0-4 -->
+					<!--This element is used to specify up to 4 different passenger types within flexible fares -->
+					<!--Code (optional)- passenger type code-->
+					<!--Quantity (optional)- quantity of given passenger type -->
+					<PassengerTypeQuantity Code="CNN" Quantity="1"/>
+					<PassengerTypeQuantity Code="ADT" Quantity="2"/>
+					<!--Optional-->
+					<!--Controls if response could contain options with cabin class different than requested -->
+					<!--For two- and more- segment solutions where at least one segment offers preferred cabin, jump cabin will be performed for the segment where preferred cabin is not offered but the lower cabin is offered and available.-->
+					<!--Disabled (required)- if set to 'true' will apply the logic described above-->
+					<JumpCabinLogic Disabled="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Enabled (required)- Set to "true" guarantees that all segments within single shopping option belong to the requested cabin. When KeepSameCabin Enabled = "true" is used in conjunction with JumpCabinLogic Disabled ="true", KeepSameCabin overrides JumpCabin parameter. -->
+					<KeepSameCabin Enabled="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--CorporateID code.-->
+					<!--Attribute "Code" (required), Corporate ID code, You can specify up to twenty-five corporate IDs or account codes combined in a single request. -->
+					<CorporateID Code="AAA00"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--AccountCode code-->
+					<!--Attribute "Code" (required), AccountCode, You can specify up to twenty-five corporate IDs or account codes combined in a single request. -->
+					<AccountCode Code="String"/>
+				</FareParameters>
+			</FlexibleFares>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Limit number of additional fares displayed for each itinerary-->
+			<!--Value (mandatory) Additional fare limit. Default 16-->
+			<AdditionalFareLimit Value="0"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Fare Focus is a powerful agency tool which creates business rules that apply consistently across pricing, shopping, ticketing, fare quote and the associated Sabre APIs to filter out fare content that hinders the selling of your most valuable fare content.-->
+			<!--Exclude (optional)- when set to 'true' fare focus business rules will be ignored. In order to use this parameter EPR keyword- FFOCUS is required.-->
+			<FareFocusRules Exclude="true"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Diversity Parameters elements -->
+			<!--InboundOutboundPairing (attribute), Not applicable for this release.  Defines requested ratio of inbounds to outbounds in response.-->
+			<!--AdditionalNonStopsNumber (attribute), Defines how many additional non-stop options should be added to response. Overrides @Percentage.-->
+			<!--AdditionalNonStopsPercentage (attribute), Defines how many additional non-stop options should be added to response as a percentage of requested number of options.-->
+			<DiversityParameters AdditionalNonStopsNumber="9" AdditionalNonStopsPercentage="10">
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Defines how important are various parameters of options in response. Sum of all weightings needs to equal 10.-->
+				<Weightings PriceWeight="7" TravelTimeWeight="3"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Not applicable for this release. Defines how options in response should be distributed between certain departure time of day ranges. All defined TimeOfDayRanges need to cover whole day and sum of all Percentages needs to equal 100.-->
+				<TimeOfDayDistribution>
+					<!--Mandatory-->
+					<!--Repeat Factor=2-4-->
+					<!--Begin (attribute), Begin of this TimeOfDayRange in HHMM format.-->
+					<!--End (attribute), End of this TimeOfDayRange in HHMM format. -->
+					<!--Percentage (attribute), Defines how many percent of options should be in this TimeOfDayRange.-->
+					<TimeOfDayRange Begin="0000" End="1200" Percentage="10"/>
+					<TimeOfDayRange Begin="1201" End="1800" Percentage="70"/>
+					<TimeOfDayRange Begin="1801" End="2359" Percentage="20"/>
+				</TimeOfDayDistribution>
+			</DiversityParameters>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Sabre Internal Usage Only. Element controlling Mark Up Any Fare functionality. When SellingLevels element is defined, one of its sub-elements has to be provided, either SellingLevelRules or ShowFareAmounts.-->
+			<SellingLevels>
+				<!--Mandatory-->
+				<!--Repeat Factor=1-1-->
+				<!--'Ignore' (required). If ignore set to 'true', adjustment SellingLevelRules will be ignored. To use this element ORGFQD EPR keyword is required.-->
+				<SellingLevelRules Ignore="true"/>
+				<!--Mandatory -->
+				<!--RepeatFactor=1-1-->
+				<!--ShowFareAmounts- element defining which FareLevel should be returned in the response. When ShowFareAmounts element  is defined, only one of its attributes can be defined, either Original or Adjusted. At least one is necessary.-->
+				<!--Original (optional)- when set to 'true', original  fare amount will be returned in total fare amount, and additional MarkUp information will be returned in "SellingFareData" element. To use this attribute ORGFQD EPR keyword is required.-->
+				<!--Adjusted (optional)- when set to 'true' selling fare level amount and total adjusted fare amount will be returned.To use this attribute AGYRET EPR keyword is required.-->
+				<ShowFareAmounts Original="true" Adjusted="true"/>
+			</SellingLevels>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--List of countries to be excluded from processing-->
+			<CountryPref Code="XX" PreferLevel="Unacceptable"/>
+			<!--Optional-->
+			<!--RepeatFactor=0-1-->
+			<!--Provides the capability to request fares matching specified retailer rules -->
+			<!--Force (optional) -If set to true, only fares with a matched Business Rule containing the specified Retailer Rule Qualifier will be returned -->
+			<RetailerRules Force="false">
+				<!--Required-->
+				<!--RepeatFactor=1-4 -->
+				<!--Up to 4 different retailer rules can be requested -->
+				<!--Code (required)- specific rule retailer code -->
+				<RetailerRule Code="ABCD"/>
+			</RetailerRules>
+		</TPA_Extensions>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--Ancillary Fees processing options.-->
+		<!--"Enable" (required) Indicator for whether to enable the ancillary fees.-->
+		<!--Enable="true" Enable ancillary fees.-->
+		<!--Enable="false" Do not enable ancillary fees.-->
+		<!--"Summary" (optional) Indicator for whether this is a summary request.-->
+		<!--Summary="true" Indicates the request is a summary request.-->
+		<!--Summary="false" Indicates the request is not a summary request.-->
+		<AncillaryFees Enable="false" Summary="false">
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--List of requested groups of ancillary fees.-->
+			<!--"Code" (required) Fee group code.-->
+			<!--Code="BG" Baggage.-->
+			<!--Code="IE" In-flight entertainment.-->
+			<!--Code="ML" Meals.-->
+			<!--Code="SA" Seats.-->
+			<!--Code="UN" Unaccompanied passenger.-->
+			<!--"Count" (optional) Number of items.-->
+			<AncillaryFeeGroup Code="ML" Count="1"/>
+		</AncillaryFees>
+		<!--Optional-->
+		<!-- Spanish Large Family Discount processing options.-->
+		<!--"Level" (required) Spanish Large Family Discount Level. Valid values are 1 or 2.-->
+		<!-- Spanish Large Family Discount Level 1 – 5 % of the base fare-->
+		<!-- Spanish Large Family Discount Level 2 – 10% of the base fare-->
+		<SpanishFamilyDiscount Level="1"/>
+	</TravelPreferences>
+	<!--Mandatory-->
+	<!--Repeat Factor=1-->
+	<TravelerInfoSummary>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--Sum of all seats required by all passenger groups.-->
+		<SeatsRequested>1</SeatsRequested>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--Passenger type groupings. A single AirTravelerAvail element with its passenger types in the PassengerTypeQuantity element is required.-->
+		<AirTravelerAvail>
+			<!--Mandatory-->
+			<!--Repeat Factor=1-4-->
+			<!--"Code" (required) Passenger type code.-->
+			<!--"Quantity" (required) Number of passengers for this passenger type code. Valid values are: 1 through 8.-->
+			<PassengerTypeQuantity Code="ADT" Quantity="1">
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<TPA_Extensions>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Identifies whether penalties associated with voluntary changes should be included in the search results or specifies penalties criteria that should be taken into consideration during search process-->
+					<!--Match (optional) Indicates relation between conditions. 
+					Match="All" Indicates that all penalty conditions must be match by returned fare. 
+					Match="Any" Indicates that at least one penalty must by match by returned fare. 
+					Match="Info" Indicates that penalty information must be returned in the response.-->
+					<VoluntaryChanges Match="All">
+						<!--Optional-->
+						<!--Repeat factor 0-2-->
+						<!--Specifies penalty criteria for given search-->
+						<!--Type (optional), Indicates the type (Refund or Exchange) of penalty involved in the search or response.-->
+						<!--Exclude (optional), Indicate that fares with specified penalty type should be excluded from the response.-->
+						<!--Application (optional) indicates whether given penalty should apply to changes before or after departure from the origin city.-->
+						<!--Amount (optional)-->
+						<!--DecimalPlaces (optional)-->
+						<!--CurrencyCode (optional)-->
+						<Penalty Type="Exchange" Exclude="false" Application="After" Amount="150.00" DecimalPlaces="2" CurrencyCode="USD"/>
+						<Penalty Type="Refund" Exclude="false" Application="Before" Amount="150.00" DecimalPlaces="2" CurrencyCode="USD"/>
+					</VoluntaryChanges>
+				</TPA_Extensions>
+			</PassengerTypeQuantity>
+		</AirTravelerAvail>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<!--"NegotiatedFaresOnly" (optional) - A value of "true" returns only the designated corporate ID fares, even if a less expensive fare exists.-->
+		<!--"CurrencyCode" (optional) - currency preferred for reviewing monetary values, in ISO 4217 codes-->
+		<!--"ProcessThruFaresOnly" (optional) - A value of "true" returns only Through fares.-->
+		<!--"PurchaseDate" (optional) Alternate purchase date to retrieve the fares.-->
+		<PriceRequestInformation NegotiatedFaresOnly="false" CurrencyCode="USD" ProcessThruFaresOnly="false" PurchaseDate="2009-12-23">
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--"Code" (optional) Corporate ID to retrieve fares filed with this corporate ID.-->
+			<!--Schema allows an unlimited number of codes, but the default  configuration is limiting up to 25 corporate IDs or account codes combined in a single request. In the case of exceeding the number of allowed codes, the following error will be returned: "JR qualifiers validation error: Maximum total number of Account Codes / Corporate IDs exceeded -->
+			<NegotiatedFareCode Code="ABC">
+				<!--Optional-->
+				<!--Repeat Factor=0-unlimited-->
+				<!--"Code" (optional) Airline code corresponding to the negotiated fare code.-->
+				<Supplier Code="AAA"/>
+			</NegotiatedFareCode>
+			<!--Optional-->
+			<!--Repeat Factor=0-unlimited-->
+			<!--"Code" (optional) Account code to retrieve fares filed with this account code.-->
+			<!--Schema allows an unlimited number of codes, but the default internal configuration is limiting up to 25 corporate IDs or account codes combined in a single request. In the case of exceeding the number of allowed codes, the following error will be returned: "JR qualifiers validation error: Maximum total number of Account Codes / Corporate IDs exceeded -->
+			<AccountCode Code="XYZ"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<TPA_Extensions>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--"Ind" (optional) - A value of "true" returns only public fares.-->
+				<PublicFare Ind="false"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--"Ind" (optional) - A value of "true" returns only private fares.-->
+				<PrivateFare Ind="false"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<Priority>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--"Priority" (required) Priority order of price. Valid values are: 1 through 4.-->
+					<Price Priority="1"/>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--"Priority" (required) Priority order of direct flights. Valid values are: 1 through 4.-->
+					<DirectFlights Priority="2"/>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--"Priority" (required) Priority order of departure time. Valid values are: 1 through 4.-->
+					<Time Priority="3"/>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--"Priority" (required) Priority order of specified carrier. Valid values are: 1 through 4.-->
+					<Vendor Priority="4"/>
+				</Priority>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<Indicators>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--"Ind" (required) Indicator for whether to request the retain fare.-->
+					<RetainFare Ind="true"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--"Ind" (required) Indicator for whether the fare can contain a Minimum Maximum Stay restriction. If the value is "true", the response can contain fares that have a min/max stay restriction. If the value is "false", no fares that include a min/max stay requirement will be included in the response.-->
+					<MinMaxStay Ind="false"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--"Ind" (required) Indicator for whether the fare can contain a refund penalty. If the value is "true", the response can contain fares that have a refund penalty. If the value is "false", no fares that include a refund penalty requirement will be included in the response.-->
+					<RefundPenalty Ind="false"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--"Ind" (required) Indicator for whether the fare can contain a ticketing policy. If the value is "true", the response can contain fares that have a reservation/ticketing requirement. If the value is "false", no fares that include a reservation/ticketing requirement will be included in the response.-->
+					<ResTicketing Ind="false"/>
+				</Indicators>
+				<!--Optional-->
+				<!--Repeat Factor 0-1-->
+				<!--"SingleBrandedFare" (optional)Return single brand option per itin-->
+				<!--"MultipleBrandedFares" (optional) Return multiple brand options per itin-->
+				<BrandedFareIndicators SingleBrandedFare="true" MultipleBrandedFares="true"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--"Type" (required) - Passenger type.-->
+				<!--Type="R" - Residency.-->
+				<!--Type="E" - Employee.-->
+				<!--Type="N" - Nationality.-->
+				<PassengerStatus Type="N">
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Postal service standard code or abbreviation for the state, province, or region.-->
+					<!--Cannot combine with CityCode.-->
+					<StateCode>123456</StateCode>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--Two-character ISO Country code.-->
+					<!--Cannot combine with CityCode.-->
+					<CountryCode>US</CountryCode>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--Three-character city code.-->
+					<!--Cannot combine with StateCode or CountryCode.-->
+					<CityCode>DFW</CityCode>
+				</PassengerStatus>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Will return the fares available for specified point of sale and priced in this point of sale currency-->
+				<!--"Code" (required) - Three-character city code.-->
+				<PointOfSaleOverride Code="DFW"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Should contain city code of a city that you want to make ticketing process in.-->
+				<!--"Code" (required) - Three-character city code.-->
+				<PointOfTicketingOverride Code="AAA"/>
+			</TPA_Extensions>
+		</PriceRequestInformation>
+	</TravelerInfoSummary>
+	<!--Mandatory-->
+	<!--Repeat Factor=1-->
+	<TPA_Extensions>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-->
+		<IntelliSellTransaction>
+			<!--Mandatory-->
+			<!--Repeat Factor=1-->
+			<!--"Name" (required) Type of request. It specifies the number of options returned for one-way, round-trip, single/double open jaw, and multi-destination trips with less than three legs. For complex, multi-destination, and circle trips with three or more legs, 19 options will always be returned.-->
+			<!--Name="50ITINS" Returns 50 itineraries in the response. The action code in the SOAP header must be set to BargainFinderMaxRQ.-->
+			<!--Name="100ITINS" Returns 100 itineraries. The action code in the SOAP header must be set to BargainFinderMaxRQ.-->
+			<!--Name="200ITINS" Returns 200 itineraries. The action code in the SOAP header must be set to BargainFinderMaxRQ.-->
+			<!--If a Request Type other than the ones listed above is used, the response is "No Availability".-->
+			<!--Using a Request Type name for a tier to which you are not subscribed also returns a "No Availability" response.-->
+			<RequestType Name="50ITINS"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"Value" (optional) - A value of "true" returns the response payload in a Base64 encoded GZIP format. For instructions on how to decode and unzip the response, see the Response design document.-->
+			<CompressResponse Value="true"/>
+		</IntelliSellTransaction>
+		<!--Optional-->
+		<!--Repeat Factor=0-unlimited-->
+		<!--Cannot combine with AlternateAirportMileage-->
+		<AlternateAirportCities>
+			<!--Mandatory-->
+			<!--Repeat Factor=1-->
+			<!--"LocationCode" (optional) Location code (from either Origin LocationCode or Destination LocationCode) for which you want to specify alternate airports.-->
+			<SpecifiedLocation LocationCode="LHR"/>
+			<!--Mandatory-->
+			<!--Repeat Factor=1-4-->
+			<!--"LocationCode" (optional) Alternate location code to be considered.-->
+			<AlternateLocation LocationCode="LBA"/>
+		</AlternateAirportCities>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--"Number" (required) Mileage radius range to search for alternate airports.-->
+		<!--Cannot combine with AlternateAirportCities-->
+		<AlternateAirportMileage Number="50"/>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--Multi-Ticket capabilities are available by request only. For details, contact your Account Manager-->
+		<!--DisplayPolicy (optional) Display Option Policy, takes values:
+			- SOW - Show OneWays separately - first show standard RT output, then show OW for 1st and 2nd legs separately.
+			Customer receives Round Trip and OneWays (outbound and inbound) solutions for the same request. OneWay solutions will be presented as 2 separate sections (OneWay Outbound and OneWay Inbound)  and not as combination of two OneWay solutions combined into one round trip itinerary. Customer will be able to build the RT solution by choosing the most applicable, comfortable and cheapest OneWay solutions.
+			- SCHS - Group OneWays, match to RoundTrip and show cheaper solution.
+			Customer receives cheapest solutions between Round Trip and 2 OneWay solution for the same request. OW solutions will be presented as combination of separate one way tickets into one round trip Itinerary.-->
+		<MultiTicket DisplayPolicy="SOW"/>
+		<!--Optional-->
+		<!--Repeat Factor=0-1-->
+		<!--Set of parameters to provide diversity in shopping response. Implemented within Diversity Swapper project-->
+		<DiversityControl>
+			<!--Mandatory-->
+			<!--Repeat Factor=1-->
+			<!--Indicates low fare bucket options. This group of options will not be considered by diversity processing.-->
+			<!--Either @Options or @FareCutOff has to be specified in request. Specify either @Options="20%" or "FareCutOff="25%".-->
+			<!--Options (optional) Number or percentage of options.  -->
+			<!--FareCutOff (optional) Indicates the fare lever above with the results will be considered by diversity processing-->
+			<LowFareBucket Options="20%" FareCutOff="25%"/>
+			<!--Mandatory-->
+			<!--Repeat Factor=1-->
+			<!--Parameters influencing diversity processing -->
+			<!--PriceWeight(optional) - Price Weight is necessary to provide meaning to any other dimension weight. The PriceWeight value can be from “0” to “10”-->
+			<Dimensions PriceWeight="10">
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Dimension providing capability to prefer itineraries with shorter duration.-->
+				<!--Weight (required). Allows the User to define how much the Travel Time dimension should affect the score of an itinerary in Diversity Swapper-->
+				<TravelTime Weight="1"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Carrier preference (dimension) in diversity bucket-->
+				<!--Weight (required).Allows the User to define how much the Carrier dimension should affect the score of an itinerary in Diversity Swapper. The range of allowed values is an integer between 0 and 10.-->
+				<!--OnlineIndicator (optional). Allows the User to decide if Carrier Diversity should be applied to online versus interline itineraries-->
+				<Carrier Weight="1" OnlineIndicator="true">
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Indicates any carrier code not specified on "Override" element-->
+					<!--Options (required), Number or percentage of options-->
+					<Default Options="5"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--Specifies exact carrier code for diversity bucket-->
+					<!--Code (required) Carrier code-->
+					<!--Options (required), Number or percentage of options-->
+					<Override Code="XY" Options="5"/>
+				</Carrier>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Provides the capability to prefer itineraries that are unique if it comes to the operating flights. This is done by penalizing itineraries with duplicated operating flights.-->
+				<!--Weight (required). Allows the User to define how much the Operating Duplicate dimension should affect the score of an itinerary in Diversity Swapper.The range of allowed values is an integer between 0 and 10.-->
+				<OperatingDuplicate Weight="1">
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--Allows the User to define Preferred Validating Carrier Codes-->
+					<!--Code (required). Preferred Carrier Code-->
+					<PreferredCarrier Code="00"/>
+				</OperatingDuplicate>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Provides the capability to penalize duplicated pairs for inbound and outbound legs. If the outbound leg containing the same flights is used in the multiple shopping options with inbound legs, such options will be penalized.-->
+				<!--Weight (required). Allows the User to define how much the Inbound Outbound Pairing dimension should affect the score of an itinerary in Diversity Swapper-->
+				<!--Duplicates (optional, default value 1). Allows the User to define the preference how many options (itineraries) containing given outbound leg should be returned-->
+				<InboundOutboundPairing Weight="1" Duplicates="1"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Provides the capability to define preferred options distribution among different time ranges. Itineraries departing and/or arriving in the Time of Day range with bigger number/percentage of options specified be preferred over the others.-->
+				<!-- Weight (required). Allows the User to define how much the Time of Day dimension should affect the score of an itinerary in Diversity Swapper. The range of allowed values is an integer between 0 and 10-->
+				<TimeOfDay Weight="1">
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--Provides the capability to define multiple different itineraries distribution reference-->
+					<!--Exactly one: Leg or Direction attribute needs to be provided in the request as it is required for the successful processing-->
+					<!--Direction (optional). Possible values are "Outbound" and "Inbound".-->
+					<!--Leg (optional). Leg ID-->
+					<!--Endpoint (optional). Default value: "Departure". Specifies if the preferred Time of Day distribution should be considered for Departure or Arrival Time-->
+					<Distribution Direction="Outbound" Leg="2" Endpoint="Arrival">
+						<!--Optional-->
+						<!--Repeat Factor=0-4-->
+						<!--Provides capability to define time frames and the number/percentage of options for each range-->
+						<!--Begin (required). When the daytime range starts-->
+						<!--End (required). When the daytime range ends-->
+						<!--Options (required). Defines the percentage or number of options that should be returned in each time range bucket-->
+						<Range Begin="0:00" End="0:00" Options="0"/>
+					</Distribution>
+				</TimeOfDay>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Provides the capability to prefer itineraries consisting non-stop flights over connecting ones. This dimension penalize itineraries consisting of direct and connecting flights.-->
+				<!--Weight (required). Defines how much the Stops Number dimension should affect the score of an itinerary in Diversity Swapper. The range of allowed values is an integer between 0 and 10-->
+				<StopsNumber Weight="1"/>
+			</Dimensions>
+		</DiversityControl>
+		<!--Optional-->
+		<!--Repeat Factor=0-unlimited-->
+		<!--Available for consumption based on approval and activation only. Please refer to your account manager for information-->
+		<!--Allows to input multiple shopping/ticketing PCC's. By default you can specify up to 4 alternate PCC-->
+		<!--PseudoCityCode (required) An identification code assigned to an office/agency by a reservation system.-->
+		<AlternatePCC PseudoCityCode="ABC1">
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<TravelPreferences>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<VendorPref Code="XY" PreferLevel="Preferred"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<TPA_Extensions>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<IncludeAlliancePref Code="XY"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<ExcludeAlliancePref Code="YX"/>
+				</TPA_Extensions>
+			</TravelPreferences>
+		</AlternatePCC>
+		<AlternatePCC PseudoCityCode="XYZ1">
+			<TravelPreferences>
+				<VendorPref Code="XY" PreferLevel="Only"/>
+				<TPA_Extensions>
+					<IncludeAlliancePref Code="XY"/>
+					<ExcludeAlliancePref Code="YX"/>
+				</TPA_Extensions>
+			</TravelPreferences>
+		</AlternatePCC>
+	</TPA_Extensions>
+</OTA_AirLowFareSearchRQ>

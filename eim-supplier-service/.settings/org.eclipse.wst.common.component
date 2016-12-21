@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="eimsupplierservices">
+        <wb-resource deploy-path="/WEB-INF/web.xml" source-path="/WebContent/WEB-INF/web.xml"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <dependent-module archiveName="SaveDcInfoDetails-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SaveDcInfoDetails/SaveDcInfoDetails">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eim-services-common-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eim-services-common/eim-services-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eim-mdm-common-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eim-mdm-common/eim-mdm-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/eim-supplier-services/target/classes"/>
+        <property name="context-root" value="eimsupplierservices"/>
+        <property name="component.exclusion.patterns" value="src/test/java,src/test/resources,WEB-INF/lib/geronimo-servlet_2.5_spec-1.2.jar,WEB-INF/lib/geronimo-servlet_2.4_spec-1.1.1.jar,WEB-INF/lib/javax.servlet-2.5.0.v201103041518.jar,WEB-INF/lib/jsp-api-2.1.jar,WEB-INF/lib/servlet-api-2.5.jar"/>
+    </wb-module>
+</project-modules>

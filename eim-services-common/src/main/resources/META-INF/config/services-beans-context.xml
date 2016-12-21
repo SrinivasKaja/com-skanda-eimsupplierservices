@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+	     http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="propertyFormatter" class="com.eim.common.utils.PropertyFormatter"
+		factory-method="setInstance" scope="singleton">
+		<constructor-arg ref="propertyPlaceHolder" />
+	</bean>
+	<bean id="exceptionHandler" class="com.eim.common.handler.ExceptionHandler" />
+
+	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="password" value="tcrmservicepwd" />
+	</bean>
+
+	<!-- ==== Declaring Jasypt details ==== -->
+	<bean id="jasypt"
+		class="org.apache.camel.component.jasypt.JasyptPropertiesParser">
+		<property name="password" value="tcrmservicepwd" />
+	</bean>
+
+	<!-- ==== Declaring Properties Configurer to read encrypted properties==== -->
+	<bean id="propertyConfigurer"
+		class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="configurationEncryptor" />
+		<property name="properties" ref="propertyPlaceHolder" />
+	</bean>
+
+	<!-- Common error processor bean -->
+	<bean id="commonErrorProcessor" class="com.eim.common.util.EIMCommonErrorProcessor" />
+
+	<!-- Log interceptor bean -->
+	<bean id="logInterceptor" class="com.eim.common.log.LoggingInterceptor" />
+	<bean id="faultInterceptor" class="com.eim.common.handler.EIMFaultInterceptor" />
+
+
+	<bean id="jackSupplierDataFormatter" class="org.apache.camel.component.jackson.JacksonDataFormat">
+		<property name="include" value="NON_EMPTY" />
+		<!-- property name="prettyPrint" value="true" / -->
+		<property name="useList" value="true" />
+	</bean>
+
+	<bean id="processException" class="com.eim.common.exception.EIMProcessException">
+		<constructor-arg value="${err.authentication.failure}"
+			type="java.lang.String"></constructor-arg>
+	</bean>
+
+	<bean id="httpStatusMap" class="com.eim.common.util.EIMCommonErrorProcessor">
+		<constructor-arg>
+			<map>
+				<entry key="${err.ExceptionHandler.unhandled.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).BAD_REQUEST.getStatusCode()}" />
+				<entry key="${err.ExceptionHandler.business.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).INTERNAL_SERVER_ERROR.getStatusCode()}" />
+				<entry key="${err.ExceptionHandler.payloadvalidation.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).BAD_REQUEST.getStatusCode()}" />
+				<entry key="${err.FieldValidation.mandatory.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).BAD_REQUEST.getStatusCode()}" />
+				<entry key="${err.Invalid.Data.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).BAD_REQUEST.getStatusCode()}" />
+				<!-- <entry key="${valid.NoDataFound.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).NO_CONTENT.getStatusCode()}" /> -->
+				<entry key="${valid.NoDataFound.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).BAD_REQUEST.getStatusCode()}" />
+				<entry key="${err.DAL.code}" value="#{T(java.lang.Integer).parseInt(502)}" />
+				<entry key="${err.Invalid.InputParam.code}"
+					value="#{T(javax.ws.rs.core.Response$Status).BAD_REQUEST.getStatusCode()}" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>

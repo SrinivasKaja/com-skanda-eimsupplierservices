@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- Audit camel route context declaration -->
+	<camel:routeContext id="auditRouteContext">
+		<camel:route id="dataExceptionAudit">
+			<camel:from uri="direct:audit:dataException" />
+			<camel:setProperty propertyName="AuditStatus">
+				<camel:constant>EXCEPTION</camel:constant>
+			</camel:setProperty>
+			<camel:to uri="bean:auditServiceHandler?method=saveAudit" />
+		</camel:route>
+		<camel:route id="generalExceptionAudit">
+			<camel:from uri="direct:audit:Exception" />
+			<camel:setProperty propertyName="AuditStatus">
+				<camel:constant>EXCEPTION</camel:constant>
+			</camel:setProperty>
+			<camel:to uri="bean:auditServiceHandler?method=loadAudit" />
+			<camel:wireTap uri="direct:audit:dataException" />
+		</camel:route>
+		<camel:route id="connectionExceptionAudit">
+			<camel:from uri="direct:audit:ConnectionException" />
+			<camel:setProperty propertyName="AuditStatus">
+				<camel:constant>CONNECTION EXCEPTION</camel:constant>
+			</camel:setProperty>
+			<camel:to uri="bean:auditServiceHandler?method=loadAudit" />
+			<camel:wireTap uri="direct:audit:dataException" />
+		</camel:route>
+		<camel:route id="snmsProcessFailureAudit">
+			<camel:from uri="direct:audit:MessageException" />
+			<camel:setProperty propertyName="AuditStatus">
+				<camel:constant>EIM PROCESSING FAILURE</camel:constant>
+			</camel:setProperty>
+			<camel:to uri="bean:auditServiceHandler?method=loadAudit" />
+			<camel:wireTap uri="direct:audit:dataException" />
+		</camel:route>
+		<!-- Common Audit log to print Entity Response Object to audit_tracking_log file -->
+		<camel:route id="commonAuditLogForBAL">
+			<camel:description>Sets Entity JAXB dynamically </camel:description>
+			<camel:from uri="direct:auditLog" />
+			<camel:log message="property auditing ${properties:enable.req.resp.auditing}" logName="com.eim.common.audit" />
+			<camel:choice>
+				<camel:when>
+					<camel:simple>${properties:enable.req.resp.auditing} == 'true'</camel:simple>
+					<camel:marshal>
+						<camel:xstream id="audit-xstream" encoding="UTF-8" />
+					</camel:marshal>
+					<camel:to uri="direct:auditPrintLog"></camel:to>
+				</camel:when>
+			</camel:choice>
+		</camel:route>
+		<!-- Audit: Print BAL Logs -->
+		<camel:route id="auditPrintLogRoute">
+			<camel:from uri="direct:auditPrintLog" />
+			<camel:log message="${body}" logName="com.eim.common.audit" loggingLevel="INFO" />
+		</camel:route>
+	</camel:routeContext>
+</beans>

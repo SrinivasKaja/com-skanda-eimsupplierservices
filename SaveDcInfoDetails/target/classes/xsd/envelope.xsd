@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="http://schemas.xmlsoap.org/soap/envelope/">
+	<!-- Envelope, header and body -->
+	<xs:element type="tns:Envelope" name="Envelope" />
+	<xs:complexType name="Envelope">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:Header" />
+			<xs:element ref="tns:Body" />
+			<xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"
+				namespace="##other" />
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other" />
+	</xs:complexType>
+	<xs:element type="tns:Header" name="Header" />
+	<xs:complexType name="Header">
+		<xs:sequence>
+			<xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"
+				namespace="##other" />
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##other" />
+	</xs:complexType>
+	<xs:element type="tns:Body" name="Body" />
+	<xs:complexType name="Body">
+		<xs:sequence>
+			<xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"
+				namespace="##any" />
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##any">
+			<xs:annotation>
+				<xs:documentation> Prose in the spec does not specify that
+					attributes are allowed on the Body element </xs:documentation>
+			</xs:annotation>
+		</xs:anyAttribute>
+	</xs:complexType>
+	<!-- Global Attributes. The following attributes are intended to be usable 
+		via qualified attribute names on any complex type referencing them. -->
+	<xs:attribute name="mustUnderstand">
+		<xs:simpleType>
+			<xs:restriction base="xs:boolean">
+				<xs:pattern value="0|1" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute type="xs:anyURI" name="actor" />
+	<xs:simpleType name="encodingStyle">
+		<xs:annotation>
+			<xs:documentation> 'encodingStyle' indicates any canonicalization
+				conventions followed in the contents of the containing element. For
+				example, the value 'http://schemas.xmlsoap.org/soap/encoding/'
+				indicates the pattern described in SOAP specification
+			</xs:documentation>
+		</xs:annotation>
+		<xs:list itemType="xs:anyURI" />
+	</xs:simpleType>
+	<xs:attribute type="tns:encodingStyle" name="encodingStyle" />
+	<xs:attributeGroup name="encodingStyle">
+		<xs:attribute ref="tns:encodingStyle" />
+	</xs:attributeGroup>
+	<xs:element type="tns:Fault" name="Fault" />
+	<xs:complexType name="Fault" final="extension">
+		<xs:annotation>
+			<xs:documentation> Fault reporting structure </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element type="xs:QName" name="faultcode" />
+			<xs:element type="xs:string" name="faultstring" />
+			<xs:element type="xs:anyURI" name="faultactor" minOccurs="0" />
+			<xs:element type="tns:detail" name="detail" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detail">
+		<xs:sequence>
+			<xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"
+				namespace="##any" />
+		</xs:sequence>
+		<xs:anyAttribute processContents="lax" namespace="##any" />
+	</xs:complexType>
+</xs:schema>

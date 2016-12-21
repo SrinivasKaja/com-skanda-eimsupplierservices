@@ -1,0 +1,11 @@
+Hi,
+ 
+Please note the failure message below:
+At: ${exchange.properties.CamelCreatedTimestamp}
+
+An exception occurred during the execution of service - ${exchange.properties.ServiceName} -
+
+Actual Exception => ${exchange.properties.CamelExceptionCaught}
+
+Regards,
+Automated Monitoring

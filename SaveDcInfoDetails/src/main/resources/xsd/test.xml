@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pfx:AirLowFareSearchRQ xmlns:pfx="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/ test.xsd ">
+  <pfx:requesterDetails>
+    <pfx:requestId>pfx:requestId</pfx:requestId>
+    <pfx:sessionID>pfx:sessionID</pfx:sessionID>
+  </pfx:requesterDetails>
+</pfx:AirLowFareSearchRQ>

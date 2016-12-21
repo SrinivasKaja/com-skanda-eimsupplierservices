@@ -1,0 +1,1281 @@
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by EDS/SABRE ACCT (EDS/SABRE ACCT) -->
+<!--Optional-->
+<!--Repeat Factor=1-->
+<!--This is the root element if a compressed response is requested using <CompressResponse Value=”true”> in the request. The text of the element is a GZIP string which has been Base64 encoded. To get the uncompressed XML response, the text should be decoded using Base64 first and then unzipped using GZIP libraries. -->
+<!--
+<CompressedResponse>
+	H4sIAJymPFAAA7PxD3GMd8ws8skvd0ssSg1OTSxKzggK1rfjAgAcoRiLGgAAAA==
+</CompressedResponse>
+-->
+<!--Mandatory-->
+<!--Repeat Factor=1-->
+<!--Root element for the response.-->
+<!--NOTE: If <CompressResponse Value=”true”> is used in the request, this tag is compressed and encoded between <CompressedResponse> and <CompressResponse/> tags -->
+<!--"Version" (required) Version of the service.-->
+<!--"PricedItinCount" (optional) Number of priced itineraries returned.-->
+<!--"BrandedOneWayItinCount" (optional), Not applicable to BFM users. For a simple trip response, BrandedOneWayItinCount must be 0.-->
+<!--"SimpleOneWayItinCount" (optional) For a simple trip response, SimpleOneWayItinCount must be 0.-->
+<OTA_AirLowFareSearchRS xmlns="http://www.opentravel.org/OTA/2003/05" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.9.7" PricedItinCount="50" BrandedOneWayItinCount="0" SimpleOneWayItinCount="0" DepartedItinCount="0" SoldOutItinCount="0" AvailableItinCount="0">
+	<!--Optional-->
+	<!--Repeat Factor=0-1-->
+	<!--Indicates a successful response.-->
+	<Success/>
+	<!--Optional-->
+	<!--Repeat Factor=0-1-->
+	<Warnings>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-99-->
+		<!--These are internal messages used for debugging.-->
+		<Warning Type="ISMIPCLIENT" Code="PROCESS" ShortText="NO COMBINABLE FARES FOR CLASS USED
+"/>
+		<Warning Type="SERVER" Code="TTFHLC500" MessageClass="I" ShortText="27035"/>
+		<Warning Type="DEFAULT" Code="RULEID" MessageClass="I" ShortText="13466"/>
+		<Warning Type="DRE" Code="RULEID" MessageClass="I" ShortText="11424"/>
+		<Warning Type="WORKERTHREAD" Code="TRANSACTIONID" MessageClass="I" ShortText="1252615271134687"/>
+		<Warning Type="ISMIP" Code="MSG" MessageClass="D">...</Warning>
+	</Warnings>
+	<!--Optional-->
+	<!--Repeat Factor=0-1-->
+	<!--List of Itineraries-->
+	<PricedItineraries>
+		<!--Mandatory-->
+		<!--Repeat Factor=1-unlimited-->
+		<!--"SequenceNumber" (required) Itinerary number.-->
+		<!--"MultipleTickets" (optional) Indicates that itinerary should be sold on multiple separate tickets.-->
+		<!--"isFromCustomPath" (optional) Indicates if Itinerary come from custom carrier/routing path.-->
+		<PricedItinerary SequenceNumber="1" MultipleTickets="false" isFromCustomPath="true">
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--Includes flight legs and flight segments.-->
+			<!--"DirectionInd" (optional) Trip type.-->
+			<!--DirectionInd="OneWay" One-way trip.-->
+			<!--DirectionInd="Return" (default)Round-trip.-->
+			<!--DirectionInd="Circle" Circle trip.-->
+			<!--DirectionInd="OpenJaw" Open jaw trip.-->
+			<!--DirectionInd="Other" Complex trip.-->
+			<AirItinerary DirectionInd="Return">
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Collection of flight legs.-->
+				<OriginDestinationOptions>
+					<!--Repeat Factor=1-99-->
+					<!--"ElapsedTime" (optional) Total flight time of this leg .-->
+					<!--Each OriginDestinationOption element is a leg in the itinerary (for example, in a round-trip itinerary, two OriginDestinationOption elements exist, one for the outbound leg and the other for the inbound leg.-->
+					<OriginDestinationOption ElapsedTime="95">
+						<!--Mandatory-->
+						<!--Repeat Factor=1-4-->
+						<!--"DepartureDateTime" (required) Departure date and time.-->
+						<!--"ArrivalDateTime" (optional) Arrival date and time.-->
+						<!--"StopQuantity" (optional) Number of stops in the flight segment (different from a connection).-->
+						<!--"FlightNumber" (optional) Flight number.-->
+						<!--"ResBookDesigCode" (optional) Booking class of service.-->
+						<!--"ElapsedTime" (optional) Total flight time of this flight segment.-->
+						<FlightSegment DepartureDateTime="2009-12-25T09:50:00" ArrivalDateTime="2009-12-25T12:25:00" StopQuantity="0" FlightNumber="4725" ResBookDesigCode="E" ElapsedTime="95">
+							<!--Mandatory-->
+							<!--Repeat Factor=1-->
+							<!--"LocationCode" (required) Three-character airport code for the departure location.-->
+							<!--TerminalID (optional) Location terminal identifier.-->
+							<DepartureAirport LocationCode="LHR" TerminalID="1"/>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-->
+							<!--"LocationCode" (required) Three-character airport code for the arrival location.-->
+							<!--TerminalID (optional) Location terminal identifier.-->
+							<ArrivalAirport LocationCode="FRA" TerminalID="1"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Code" (optional) Two-character carrier code for the operating airline.-->
+							<!--"FlightNumber" (optional) Flight number of the operating airline.-->
+							<!--"CompanyShortName" (optional) Short name for the operating airline.-->
+							<OperatingAirline Code="LH" FlightNumber="4725"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-2-->
+							<!--"AirEquipType" (required) Type of aircraft.-->
+							<!--"ChangeofGauge" (optional) Indicates there is an equipment change.-->
+							<Equipment AirEquipType="321" ChangeofGauge="true"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Code" (optional) Two-character carrier code for the marketing airline.-->
+							<MarketingAirline Code="LH"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Code" (optional) Two-character carrier code for the disclosure airline.-->
+							<DisclosureAirline Code="YY"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<MarriageGrp>O</MarriageGrp>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--Collection of StopAirport (hidden stops) elements.-->
+							<StopAirports>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-unlimited-->
+								<!--"LocationCode" (required) Three-character airport code for the hidden stop.-->
+								<!--"ArrivalDateTime" (optional) Arrival date and time at the hidden stop.-->
+								<!--"DepartureDateTime" (optional) Departure date and time from the hidden stop.-->
+								<!--"ElapsedTime" (optional) Elapsed time (in minutes) since the departure at the previous airport and arrival at the hidden stop.-->
+								<!--"Duration" (optional) Stop time at the hidden stop (in minutes).-->
+								<!--"GMTOffset" (optional) Time zone differential from GMT of the hidden airport.-->
+								<!--"Equipment" (optional) Equipment type, appears only in case of hidden stops with change of equipment-->
+								<StopAirport LocationCode="CDG" ArrivalDateTime="2009-12-25T10:50:00" DepartureDateTime="2009-12-25T11:30:00" ElapsedTime="60" Duration="40" GMTOffset="1" Equipment="E70"/>
+							</StopAirports>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"GMTOffset" (optional) Time zone differential from GMT of the departure city.-->
+							<DepartureTimeZone GMTOffset="0"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"GMTOffset" (optional) Time zone differential from GMT of the arrival city.-->
+							<ArrivalTimeZone GMTOffset="1"/>
+							<!-- Optional -->
+							<!-- IATA on time performance indicators -->
+							<!-- Level (optional) DEI501 -->
+							<!-- Percentage (optional) DEI502 -->
+							<OnTimePerformance Level="9" Percentage="90"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<TPA_Extensions>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<!--"Ind" (optional) Indicator for whether the flight segment has an eTicket.-->
+								<eTicket Ind="true"/>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<!--"SubjectToGovernmentApproval" (optional) Indicator for whether the flight is a subject to government approval (DEI201).-->
+								<DataElement SubjectToGovernmentApproval="true"/>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<!-- Mandate from European Union. Return for the EU PCCs when the airline shopped is listed as BANNED by the EU.  -->
+								<!-- Type (optional) The type of message, value returned by internal Sabre Shopping Service system,  following values can be returned: FMT (Flight Message Top) , FMB (Flight Message Bottom), FMF (Flight Message Flight)  -->
+								<!-- Text (optional) The message text-->
+								<Message Type="FMT" Text="APOSTROPHE"/>
+							</TPA_Extensions>
+						</FlightSegment>
+					</OriginDestinationOption>
+					<OriginDestinationOption>
+						<FlightSegment DepartureDateTime="2009-12-31T20:10:00" ArrivalDateTime="2009-12-31T20:50:00" StopQuantity="0" FlightNumber="4742" ResBookDesigCode="E" ElapsedTime="100">
+							<DepartureAirport LocationCode="FRA" TerminalID="1"/>
+							<ArrivalAirport LocationCode="LHR" TerminalID="1"/>
+							<OperatingAirline Code="LH" FlightNumber="4742"/>
+							<Equipment AirEquipType="320"/>
+							<MarketingAirline Code="LH"/>
+							<MarriageGrp>O</MarriageGrp>
+							<DepartureTimeZone GMTOffset="1"/>
+							<ArrivalTimeZone GMTOffset="0"/>
+							<TPA_Extensions>
+								<eTicket Ind="true"/>
+								<Message Type="FMT" Text="APOSTROPHE"/>
+							</TPA_Extensions>
+						</FlightSegment>
+					</OriginDestinationOption>
+				</OriginDestinationOptions>
+			</AirItinerary>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"PricingSource" (optional) Source of the itinerary (internal Sabre Shopping Service name).-->
+			<!--"LastTicketDate" (optional) Last date this fare can be booked.-->
+			<!--"PrivateFareType" (optional) Type of private fare.-->
+			<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+			<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+			<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+			<!--PrivateFareType="@" - All other private fares.-->
+			<!--"AlternateCityOption" (optional) Indicator for whether this option is an alternate city option.-->
+			<!--AlternateCityOption="true" Indicates that this option is an alternate city option.-->
+			<!--AlternateCityOption="false" (default) Indicates that this option is not an alternate city option.-->
+			<!-- SpanishFamilyDiscountIndicator (optional). Spanish Discount indicator with values of "A", "B", "C" where "A" indicates Spanish Large Family discount only, "B" indicates Spanish Large Family discount + Spanish Islander discount, "C" indicates Spanish Islander discount only-->
+			<!-- PricingSubSource, value returned by internal Sabre Shopping Service system-->
+			<!--"BrandID" (optional), Used to indicate brand code (e.g. SS for SuperSaver) or type of Fare (e.g. Sale Fare or Full Coach and so on...)-->
+			<!--PseudoCityCode (optional)(MultiPCC) Information about Pseudo City Code for which the fare was produced.-->
+			<AirItineraryPricingInfo PricingSource="JRI4" LastTicketDate="2009-09-11" PrivateFareType="/" PseudoCityCode="ABC1" AlternateCityOption="false" SpanishFamilyDiscountIndicator="A">
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Total price of the itinerary.-->
+				<ItinTotalFare>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--"Amount" (optional) Base fare amount.-->
+					<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+					<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+					<BaseFare Amount="10.00" CurrencyCode="GBP" DecimalPlaces="2"/>
+					<!-- Optional  -->
+					<!-- Repeat Factor=0-1  -->
+					<!-- Fare construction is a total amount and currency from the FareCalcLine -->
+					<!-- "Amount" (optional) Fare construction total amount.  -->
+					<!-- "CurrencyCode" (optional) Three-character fare construction currency code.  -->
+					<!-- "DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".  -->
+					<FareConstruction Amount="153.50" CurrencyCode="NUC" DecimalPlaces="2"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--"Amount" (optional) Equivalent amount.-->
+					<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+					<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+					<EquivFare Amount="16.00" CurrencyCode="USD" DecimalPlaces="2"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<Taxes>
+						<!--Mandatory-->
+						<!--Repeat Factor=1-99-->
+						<!--"TaxCode" (required) Tax type code.-->
+						<!--"Amount" (optional) Tax amount.-->
+						<!--"CurrencyCode" (optional) Three-character currency code of the tax.-->
+						<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+						<Tax TaxCode="TOTALTAX" Amount="142.70" CurrencyCode="USD" DecimalPlaces="2"/>
+					</Taxes>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-->
+					<!--"Amount" (optional) Total price passengers pay (includes fare, taxes, and fees).-->
+					<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+					<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+					<TotalFare Amount="158.70" CurrencyCode="USD" DecimalPlaces="2"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<TPA_Extensions>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<Messages>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-unlimited-->
+							<Message Type="S" Info="String" AirlineCode="String" FailCode="4096"/>
+						</Messages>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<!--BaggageInformationList section-->
+						<BaggageInformationList>
+							<!--Optional-->
+							<!--Repeat Factor=0-unlimited-->
+							<!--Information about baggage-->
+							<BaggageInformation>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-unlimited-->
+								<!--Id (required), Id of segment that current baggage information applies to.-->
+								<Segment Id="0"/>
+								<Segment Id="1"/>
+								<Segment Id="2"/>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-unlimited-->
+								<!--Pieces (optional), Number of Pieces-->
+								<!--Weight (optional), Weight Limit-->
+								<!--Unit (optional), Units of the Weight Limit-->
+								<Allowance Pieces="1"/>
+							</BaggageInformation>
+						</BaggageInformationList>
+					</TPA_Extensions>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Air Extras total summary amount.-->
+					<!--"Amount" (required) Total monetary amount of the Air Extras.-->
+					<Extras Amount="10.00"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Total price including Air Extras.-->
+					<!--"Amount" (required) Total monetary amount including the Air Extras.-->
+					<TotalWithExtras Amount="168.70"/>
+				</ItinTotalFare>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Passenger fare breakdowns.-->
+				<PTC_FareBreakdowns>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-20-->
+					<!--One PTC_FareBreakdown element for each type of passenger. For example, if the request is for two ADT (adult) and one CNN (child), two PTC_FareBreakdown elements exist, one for two ADT and one for the CNN passenger. If the CNN passenger fare is not available, an ADT fare will return (in its own PTC_FareBreakdown element).-->
+					<!--"PrivateFareType" (optional) Type of private fare.-->
+					<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+					<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+					<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+					<!--PrivateFareType="@" - All other private fares.-->
+					<PTC_FareBreakdown PrivateFareType="/">
+						<!--Mandatory-->
+						<!--Repeat Factor=1-->
+						<!--"Code" (optional) Passenger type code.-->
+						<!--"Quantity" (optional) Number of passengers for this passenger type code.-->
+						<PassengerTypeQuantity Code="ADT" Quantity="1"/>
+						<!--Mandatory-->
+						<!--Repeat Factor=1-->
+						<!--Collection of FareBasisCode elements.-->
+						<FareBasisCodes>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-10-->
+							<!--Fare basis code.-->
+							<!--"PrivateFareType" (optional) Type of private fare.-->
+							<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+							<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+							<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+							<!--PrivateFareType="@" - All other private fares.-->
+							<!--"BookingCode" (optional) Booking code.-->
+							<!--FareComponentBeginAirport (optional)- If this attribute is present, the enclosing FareBasisCode element is the first portion of a new fare component. It represents the origin airport of the fare component.-->
+							<!--FareComponentEndAirport (optional)- If this attribute is present, the enclosing FareBasisCode element is the first portion of a new fare component. It represents the destination airport of the fare component-->
+							<!--FareComponentDirectionality (optional)- If this attribute is present, the enclosing FareBasisCode element is the first portion of a new fare component. If its value is "FROM" it means that fare component origin and destination are ordered the same as the departure and arival airports of the leg. Value "TO" means the opposite ordering of fare component origin and destination.-->
+							<!--GovCarrier (optional) - Fare owning carrier for given fare basis code.-->
+							<FareBasisCode PrivateFareType="@" FareComponentReferenceID="1" AccountCode="ACC02" Mileage="1200" BookingCode="A" AvailabilityBreak="true" DepartureAirportCode="FRA" ArrivalAirportCode="NYC" FareComponentBeginAirport="FRA" FareComponentEndAirport="NYC" FareComponentDirectionality="FROM" GovCarrier="AA">ONLN3C</FareBasisCode>
+						</FareBasisCodes>
+						<!--Mandatory-->
+						<!--Repeat Factor=1-->
+						<!--The total passenger fare with cost breakdown.-->
+						<PassengerFare>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-->
+							<!--"Amount " (optional) Base fare amount. Base fare is the price of the inventory excluding taxes and fees.-->
+							<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+							<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+							<BaseFare Amount="10.00" CurrencyCode="GBP" DecimalPlaces="2"/>
+							<!-- Optional  -->
+							<!-- Repeat Factor=0-1  -->
+							<!-- Fare construction is a total amount and currency from the FareCalcLine -->
+							<!-- "Amount" (optional) Fare construction total amount.  -->
+							<!-- "CurrencyCode" (optional) Three-character fare construction currency code.  -->
+							<!-- "DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".  -->
+							<FareConstruction Amount="153.50" CurrencyCode="NUC" DecimalPlaces="2"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Amount " (optional) Equivalent amount. This is the price of the inventory excluding taxes and fees in the payabale currency.-->
+							<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+							<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+							<EquivFare Amount="16.00" CurrencyCode="USD" DecimalPlaces="2"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<Taxes>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-99-->
+								<!--"TaxCode" (required) Tax type code.-->
+								<!--"Amount" (optional) Tax amount.-->
+								<!--"CurrencyCode" (optional) Three-character currency code of the tax.-->
+								<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+								<Tax TaxCode="GB6" Amount="18.00" CurrencyCode="USD" DecimalPlaces="2"/>
+								<Tax TaxCode="UB6" Amount="35.30" CurrencyCode="USD" DecimalPlaces="2"/>
+								<Tax TaxCode="DE2" Amount="10.30" CurrencyCode="USD" DecimalPlaces="2"/>
+								<Tax TaxCode="RA1" Amount="27.50" CurrencyCode="USD" DecimalPlaces="2"/>
+								<Tax TaxCode="YQF" Amount="25.80" CurrencyCode="USD" DecimalPlaces="2"/>
+								<Tax TaxCode="YQF" Amount="25.80" CurrencyCode="USD" DecimalPlaces="2"/>
+							</Taxes>
+							<!--Optional-->
+							<!--Repeat Factor=0-unlimited-->
+							<OBFees>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-unlimited-->
+								<!--"Amount" (optional) Fee amount.-->
+								<!--"CurrencyCode" (optional) Three-character currency code of the fee.-->
+								<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+								<OBFee Amount="45.50" CurrencyCode="USD" DecimalPlaces="2"/>
+							</OBFees>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-->
+							<!--"Amount" (optional) Total fare amount.-->
+							<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+							<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+							<TotalFare Amount="158.70" CurrencyCode="USD" DecimalPlaces="2"/>
+							<!--Optional-->
+							<!--Repeat Factor 0-1-->
+							<!--Penalties information-->
+							<PenaltiesInfo>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-unlimited-->
+								<!--Penalty Info-->
+								<!--Type (optional) Indicates if penalty refers to Refund or Exchange-->
+								<!--Applicability indicates if given penalty applies Before or After departure -->
+								<!--Refundable (optional) if set to 'true' given fare is refundable-->
+								<!--Changeable (optional) if set to 'true' given fare is changeable-->
+								<!--ConditionsApply (optional) if set to 'true' for given fare, it means that fare is Refundable/Changeable in general but there are some restrictions to this general rule.-->
+								<!--Amount (optional)-->
+								<!--CurrencyCode (optional)-->
+								<!--DecimalPlaces (optional)-->
+								<!--Cat16 (optional) Info if true given penalty information comes from Category 16-->
+								<Penalty Type="Refund" Applicability="After" Refundable="true" ConditionsApply="false" Amount="0.00" CurrencyCode="USD" DecimalPlaces="2.00"/>
+								<Penalty Type="Refund" Applicability="Before" Refundable="true" Amount="100.00" CurrencyCode="USD" DecimalPlaces="2" Cat16Info="true"/>
+								<Penalty Type="Exchange" Applicability="After">
+									<!--Optional-->
+									<!--RepeatFactor=0-unlimited-->
+									<!--This element is returned when no information about exchange/refund is filed in Cat31 or Cat33 and Cat16 contains text info only. Cat16 text should be verified.-->
+									<!--FareBasisCode (optional)- fare basis code for which Cat16 contains text only.-->
+									<!--FareComponentID (optional)- fare component id for which Cat16 contains text only.-->
+									<Cat16TextOnly FareBasisCode="ONLN3C" FareComponentID="1"/>
+								</Penalty>
+								<Penalty Type="Exchange" Applicability="Before">
+									<Cat16TextOnly FareBasisCode="ONLN3C" FareComponentID="1"/>
+								</Penalty>
+							</PenaltiesInfo>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<TPA_Extensions>
+								<!--Optional-->
+								<!--Repeat Factor=0-unlimited-->
+								<!--Surcharge amounts for this passenger fare in the fare's currency.-->
+								<!--"Ind" (optional) One-letter type code of the surcharge.-->
+								<!--"Type" (optional) Type of the surcharge.-->
+								<Surcharges Ind="Q" Type="UNK">4.08</Surcharges>
+								<Surcharges Ind="Q" Type="UNK">4.08</Surcharges>
+								<!--Optional-->
+								<!--Repeat Factor 0-1-->
+								<!--A collection of additional information for each Fare Component-->
+								<FareComponents>
+									<!--Mandatory-->
+									<!--Repeat Factor 1-unlimited-->
+									<!--Subtotal pricing summary for Fare Component.-->
+									<!--"ProgramID" (optional), Identifier for programs that form a valid match for the conditions specified in the request. The Program ID is system generated.-->
+									<!--"ProgramDescription" (optional), A program is a set of fare brands with a point of sale and origin and destination that is designed to be marketed with services desirable to customers.-->
+									<!--"BrandID" (optional), A short code representing each brand (usually two characters).-->
+									<!--"BrandName" (optional), A marketing name for a specified group of fares within a Brand Program-->
+									<FareComponent ProgramID="AAA" ProgramDescription="Description" BrandID="AA" BrandName="AAA">
+										<!--Mandatory-->
+										<!--Repeat Factor 0-1-->
+										<!--Price of the inventory excluding taxes and fees.-->
+										<!--"Amount" (optional)-->
+										<!--"CurrencyCode" (optional)-->
+										<!--DecimalPlaces" (optional), Indicates the number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+										<BaseFare Amount="1" CurrencyCode="ABC" DecimalPlaces="1"/>
+										<!--Mandatory-->
+										<!--Repeat Factor 0-1-->
+										<!--The total price that the passenger would pay (includes fare, taxes, fees)-->
+										<TotalFare Amount="1" CurrencyCode="ABC" DecimalPlaces="1"/>
+										<!--Optional -->
+										<!--RepeatFactor=0-unlimited -->
+										<!--Provides information about handling markup detailes if applicable -->
+										<!--MarkupHandlingFeeAppID (optional)-markup handling fee application ID -->
+										<!--MarkupTypeCode (optional) -->
+										<!--FareAmountAfterMarkup (optional) -->
+										<!--MarkupAmount (optional) -->
+										<!--AmountCurrency (optional) -->
+										<!--MarkupRuleSourcePCC (optional) -->
+										<!--MarkupRuleItemNumber (optional) -->
+										<HandlingMarkupDetail MarkupHandlingFeeAppID="ABCD" MarkupTypeCode="SDXC" FareAmountAfterMarkup="1050.00" MarkupAmount="250" AmountCurrency="USD" MarkupRuleSourcePCC="ABCD" MarkupRuleItemNumber="4294967295"/>
+										<!--Optional -->
+										<!--RepeatFactor=0-unlimited -->
+										<!--Matched general retailer rule code or adjusted selling level retailer rule code -->
+										<!--TransactionType (required)- general or adjusted selling level -->
+										<!--Code (required)- matched retailer rule code-->
+										<FareRetailerRule TransactionType="0" Code="00"/>
+									</FareComponent>
+									<FareComponent ProgramID="ABC" ProgramDescription="U.A.E TO THE WORLD" BrandID="AA" BrandName="ECONOMY">
+										<BaseFare Amount="1" CurrencyCode="ABC" DecimalPlaces="1"/>
+										<TotalFare Amount="1" CurrencyCode="ABC" DecimalPlaces="1"/>
+									</FareComponent>
+								</FareComponents>
+								<!--Optional-->
+								<!-- Repeat Factor=0-1-->
+								<Messages>
+									<!--Mandatory-->
+									<!--Repeat Factor=1-unlimited-->
+									<!--AirlineCode (optional)-->
+									<!--Type (optional)-->
+									<!--FailCode (optional)-->
+									<!--Info (optional), Message text-->
+									<Message AirlineCode="XX" Type="N" FailCode="0" Info="NONREF/RESTRICTIONS APPLY/NONEND/PENALTIES APPLY"/>
+									<Message Type="T" FailCode="0" Info="NEG NOT APPLICABLE - ADT FARE USED - VERIFY RESTRICTIONS"/>
+									<Message Type="W" FailCode="0" Info="VALIDATING CARRIER SPECIFIED - XX"/>
+								</Messages>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<!--BaggageInformationList section-->
+								<BaggageInformationList>
+									<!--Optional-->
+									<!--Repeat Factor=0-unlimited-->
+									<!--Information about baggage-->
+									<BaggageInformation>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-unlimited-->
+										<!--Id (required), Id of segment that current baggage information applies to.-->
+										<Segment Id="0"/>
+										<Segment Id="1"/>
+										<Segment Id="2"/>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-unlimited-->
+										<!--Pieces (optional), Number of Pieces-->
+										<!--Weight (optional), Weight Limit-->
+										<!--Unit (optional), Units of the Weight Limit-->
+										<Allowance Pieces="1"/>
+									</BaggageInformation>
+								</BaggageInformationList>
+								<!--Optional-->
+								<!--RepeatFactor=0-1-->
+								<!--MarkUp information if applicable-->
+								<SellingFareDataList>
+									<!--LayerTypeName (mandatory) indicates that returned fare level is adjusted selling fare-->
+									<SellingFareData LayerTypeName="ADS">
+										<!--Optional-->
+										<!--0-unlimited-->
+										<!--Present only when ShowFareAmounts/@Original set to 'true' in the request. This is a summary information about the MarkUp amount, markUp type and MarkUp description. When this element is present, total fare amount does not include MarkUp amount.-->
+										<!--TypeCode (required) defines Markup type-->
+										<!--Description (required)-->
+										<!--MonetaryAmountValue (required)-->
+										<HandlingMarkupSummary TypeCode="J" Description="ADJT AMT" MonetaryAmountValue="10.00"/>
+									</SellingFareData>
+								</SellingFareDataList>
+								<!--Optional-->
+								<!--RepeatFactor=0-1-->
+								<!---Returns comission data if applicable-->
+								<!--Cat35CommissionPercentage (optional)-->
+								<!--Cat35CommissionAmount (optional) if present, it includes cat35 MarkUp amount-->
+								<!--Cat35MarkupAmount (optional)-->
+								<!--CommissionAmountInEquivalent (optional)-->
+								<!--ValidatingCarrierCommissionIndicator (optional)-->
+								<!--CommissionSource (optional)  [value C for Cat 35, A for AMC, M for Manual]-->
+								<CommissionData Cat35CommissionPercentage="5" Cat35CommissionAmount="10.00" Cat35MarkupAmount="20.00" CommissionAmountInEquivalent="20.00" ValidatingCarrierCommissionIndicator="true" CommissionSource="A">
+									<!--Optional-->
+									<!--RepeatFactor=0-23-->
+									<!--Commission breakdown per ValidatingCarrier -->
+									<!--ValidatingCarrier (optional)-->
+									<!--CommissionAmount (required)-->
+									<!--TotalAmountIncludingMarkUp (optional)-->
+									<!--CommissionPercent (optional)-->
+									<VCCInformation ValidatingCarrier="AA" CommissionAmount="10.00" TotalAmountIncludingMarkUp="15.00" CommissionPercent="5">
+										<!--Optional-->
+										<!--RepeatFactor=0-24-->
+										<!--Commission information per single fare component-->
+										<!--FareComponentReferenceID (optional)-->
+										<!--FareComponentCommission (optional)-->
+										<!--RuleID (optional)-->
+										<!--ProgramID (optional)-->
+										<!--ContractID (optional)-->
+										<FareComponentBreakdown FareComponentReferenceID="1" FareComponentCommission="5.00" RuleID="4294967295" ProgramID="476498" ContractID="57895904"/>
+									</VCCInformation>
+								</CommissionData>
+							</TPA_Extensions>
+						</PassengerFare>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<!--"NonRefundableIndicator" (optional) Indicator for whether a fare is refundable or not. The value is "true" for a non-refundable fare, "false" for a refundable fare.-->
+						<Endorsements NonRefundableIndicator="true"/>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<TPA_Extensions>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Info" (optional) Returns the fare calculation line for flight options.-->
+							<FareCalcLine Info="LON LH FRA8.07E99F LH LON8.07E99F NUC16.14END ROE0.618831"/>
+						</TPA_Extensions>
+					</PTC_FareBreakdown>
+				</PTC_FareBreakdowns>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Collection of FareInfo elements.-->
+				<FareInfos>
+					<!--Mandatory-->
+					<!--Repeat Factor=1-10-->
+					<!--Fare info/additional info about each flight segment. There will be one FareInfo element for every corresponding FlightSegment element in the itinerary.-->
+					<FareInfo>
+						<!--Mandatory-->
+						<!--Repeat Factor=1-->
+						<!--Booking code for the corresponding FlightSegment in the itinerary for this fare.-->
+						<FareReference>E</FareReference>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<TPA_Extensions>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Number" (optional) Number of seats remaining.-->
+							<SeatsRemaining Number="9" BelowMin="false"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Cabin" (optional) Cabin code for the corresponding FlightSegment in the itinerary for this fare.-->
+							<!--Cabin="P" - Premium First class cabin.-->
+							<!--Cabin="F" - First class cabin.-->
+							<!--Cabin="J" - Premium Business class cabin.-->
+							<!--Cabin="C" - Business class cabin.-->
+							<!--Cabin="S" - Premium Economy class cabin.-->
+							<!--Cabin="Y" - Economy class cabin.-->
+							<Cabin Cabin="Y"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Code" (optional) Meal code.-->
+							<Meal Code="S"/>
+						</TPA_Extensions>
+					</FareInfo>
+					<FareInfo>
+						<FareReference>E</FareReference>
+						<TPA_Extensions>
+							<SeatsRemaining Number="9" BelowMin="false"/>
+							<Cabin Cabin="Y"/>
+							<Meal Code="S"/>
+						</TPA_Extensions>
+					</FareInfo>
+				</FareInfos>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<TPA_Extensions>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--"Indicator" (optional) - For multiple passenger requests, if passenger types have different booking codes for their fares, they must be booked in different PNRs. For example, if the ADT must be booked in Q and the CNN must be booked in V, these cannot be booked in the same PNR. This indicator alerts you to these types of situations.-->
+					<DivideInParty Indicator="false"/>
+					<!--Optional-->
+					<!--Repeat Factor=0-1-->
+					<!--Ancillary fee groups returned.-->
+					<!--"Message" (optional) Message returned from MIP when no fees are found for this itinerary.-->
+					<AncillaryFeeGroups Message="No Ancillary Fees found">
+						<!--Optional-->
+						<!--Repeat Factor=0-unlimited-->
+						<!--Ancillary fee group returned.-->
+						<!--"Code" (required) Fee group code assigned by ATPCO.-->
+						<!--Code="BG" Baggage.-->
+						<!--Code="IE" In-flight entertainment.-->
+						<!--Code="ML" Meals.-->
+						<!--Code="SA" Seats.-->
+						<!--Code="UN" Unaccompanied passenger.-->
+						<!--"Name" (required) Group name.-->
+						<!--"Message" (optional) Message returned from MIP.-->
+						<AncillaryFeeGroup Code="IE" Name="IN-FLIGHT ENTERTAINMENT">
+							<!--Optional-->
+							<!--Repeat Factor=0-unlimited-->
+							<!--OC fee returned.-->
+							<!--"Amount" (required) Fee amount.-->
+							<!--"Description" (optional) Fee description.-->
+							<!--"OriginAirport" (required) Three-character code for the origin airport.-->
+							<!--"DestinationAirport" (required) Three-character code for the destination airport.-->
+							<!--"Carrier" (required) Two-character carrier code for the operating airline.-->
+							<!--"PassengerCode" (required) Passenger type code.-->
+							<!--"Date" (optional) Date for this fee.-->
+							<!--"StartSegment" (required) Start travel segment.-->
+							<!--"EndSegment" (required) End travel segment.-->
+							<AncillaryFeeItem Amount="10.00" Description="INTERNET ACCESS" OriginAirport="LHR" DestinationAirport="FRA" Carrier="LH" PassengerCode="ADT" Date="2009-12-25" StartSegment="1" EndSegment="1"/>
+						</AncillaryFeeGroup>
+						<AncillaryFeeGroup Code="GT" Name="GROUND TRANSPORTATION" Message="AIR EXTRAS NOT APPLICABLE OR ARE UNKNOWN"/>
+					</AncillaryFeeGroups>
+					<!--Optional-->
+					<!--Repeat Factor=0-unlimited-->
+					<!--Validating Carrier section-->
+					<!--SettlementMethod (optional)-->
+					<!--NewVcxProcess (optional)-->
+					<ValidatingCarrier SettlementMethod="ARC" NewVcxProcess="true">
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<!--Default validating carrier code-->
+						<Default Code="AZ">
+							<!--Optional-->
+							<!--RepeatFactor=0-unlimited-->
+							<!--Code (required)- Returns the country code in which IET validation was done for the given Default Validating Carrier (can be returned only if IET Validation is requested outside of POS country).-->
+							<Country Code="AA"/>
+						</Default>
+						<!--Optional-->
+						<!--Repeat Factor=0-24-->
+						<!--Alternate validating carrier code-->
+						<Alternate Code="AA">
+							<!--Optional -->
+							<!--RepeatFactor=0-unlimited-->
+							<!--Code (required)- Returns the country code in which IET validation was done for the given Alternate Validating Carrier (can be returned only if IET Validation is requested outside of POS country).-->
+							<Country Code="PL"/>
+						</Alternate>
+					</ValidatingCarrier>
+				</TPA_Extensions>
+			</AirItineraryPricingInfo>
+			<!--Optional-->
+			<!--Repeat factor=0-5-->
+			<!--Provides for free form descriptive information for the priced itinerary. -->
+			<!--"Language" (optional) -->
+			<Notes Language="en-us">Some note...</Notes>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<!--"TicketType" (required) Indicator for whether the fare returned is an e-ticketable fare or not. Value is "eTicket" for an e-ticket fare and "Paper" for a non e-ticket fare.-->
+			<!--"ValidInterline" (optional) Indicates validation of interline ticketing agreement.-->
+			<!--ValidInterline="Yes" Indicates that the option fulfills interline ticketing agreement.-->
+			<!--ValidInterline="No" Indicates that the option does not fulfill interline ticketing agreement.-->
+			<!--ValidInterline="Unknown" Indicates that the option fulfillment of interline ticketing agreement is unknown.-->
+			<TicketingInfo TicketType="eTicket" ValidInterline="Unknown"/>
+			<!--Optional-->
+			<!--Repeat Factor=0-1-->
+			<TPA_Extensions>
+				<!--Optional-->
+				<!--Repeat factor=1-unlimited-->
+				<AdditionalFares MultipleTickets="false">
+					<AirItineraryPricingInfo PricingSource="JRI4" LastTicketDate="2009-09-11" PrivateFareType="/" PseudoCityCode="ABC1" AlternateCityOption="false" SpanishFamilyDiscountIndicator="A">
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<!--Total price of the itinerary.-->
+						<ItinTotalFare>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-->
+							<!--"Amount" (optional) Base fare amount.-->
+							<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+							<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+							<BaseFare Amount="10.00" CurrencyCode="GBP" DecimalPlaces="2"/>
+							<!-- Optional  -->
+							<!-- Repeat Factor=0-1  -->
+							<!-- Fare construction is a total amount and currency from the FareCalcLine -->
+							<!-- "Amount" (optional) Fare construction total amount.  -->
+							<!-- "CurrencyCode" (optional) Three-character fare construction currency code.  -->
+							<!-- "DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".  -->
+							<FareConstruction Amount="153.50" CurrencyCode="NUC" DecimalPlaces="2"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Amount" (optional) Equivalent amount.-->
+							<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+							<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+							<EquivFare Amount="16.00" CurrencyCode="USD" DecimalPlaces="2"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<Taxes>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-99-->
+								<!--"TaxCode" (required) Tax type code.-->
+								<!--"Amount" (optional) Tax amount.-->
+								<!--"CurrencyCode" (optional) Three-character currency code of the tax.-->
+								<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+								<Tax TaxCode="TOTALTAX" Amount="142.70" CurrencyCode="USD" DecimalPlaces="2"/>
+							</Taxes>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-->
+							<!--"Amount" (optional) Total price passengers pay (includes fare, taxes, and fees).-->
+							<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+							<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+							<TotalFare Amount="158.70" CurrencyCode="USD" DecimalPlaces="2"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--Air Extras total summary amount.-->
+							<!--"Amount" (required) Total monetary amount of the Air Extras.-->
+							<Extras Amount="10.00"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--Total price including Air Extras.-->
+							<!--"Amount" (required) Total monetary amount including the Air Extras.-->
+							<TotalWithExtras Amount="168.70"/>
+						</ItinTotalFare>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<!--Passenger fare breakdowns.-->
+						<PTC_FareBreakdowns>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-20-->
+							<!--One PTC_FareBreakdown element for each type of passenger. For example, if the request is for two ADT (adult) and one CNN (child), two PTC_FareBreakdown elements exist, one for two ADT and one for the CNN passenger. If the CNN passenger fare is not available, an ADT fare will return (in its own PTC_FareBreakdown element).-->
+							<!--"PrivateFareType" (optional) Type of private fare.-->
+							<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+							<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+							<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+							<!--PrivateFareType="@" - All other private fares.-->
+							<PTC_FareBreakdown PrivateFareType="/">
+								<!--Mandatory-->
+								<!--Repeat Factor=1-->
+								<!--"Code" (optional) Passenger type code.-->
+								<!--"Quantity" (optional) Number of passengers for this passenger type code.-->
+								<PassengerTypeQuantity Code="ADT" Quantity="1"/>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-->
+								<!--Collection of FareBasisCode elements.-->
+								<FareBasisCodes>
+									<!--Mandatory-->
+									<!--Repeat Factor=1-10-->
+									<!--Fare basis code.-->
+									<!--"PrivateFareType" (optional) Type of private fare.-->
+									<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+									<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+									<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+									<!--PrivateFareType="@" - All other private fares.-->
+									<!--'"BookingCode" (optional) Booking code.-->
+									<!--"FareComponentBeginAirport" (optional), If this attribute is present, the enclosing FareBasisCode element is the first portion of a new fare component. It represents the origin airport of the fare component. -->
+									<!--"FareComponentEndAirport" (optional), If this attribute is present, the enclosing FareBasisCode element is the first portion of a new fare component. It represents the destination airport of the fare component. -->
+									<!--"FareComponentDirectionality" (optional), If this attribute is present, the enclosing FareBasisCode element is the first portion of a new fare component. If its value is "FROM" it means that fare component origin and destination are ordered the same as the departure and arrival airports of the leg. Value "TO" means the opposite ordering of fare component origin and destination.-->
+									<FareBasisCode PrivateFareType="/" BookingCode="E">E99F</FareBasisCode>
+									<FareBasisCode PrivateFareType="/" BookingCode="E">E99F</FareBasisCode>
+								</FareBasisCodes>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-->
+								<!--The total passenger fare with cost breakdown.-->
+								<PassengerFare>
+									<!--Mandatory-->
+									<!--Repeat Factor=1-->
+									<!--"Amount " (optional) Base fare amount. Base fare is the price of the inventory excluding taxes and fees.-->
+									<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+									<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+									<BaseFare Amount="10.00" CurrencyCode="GBP" DecimalPlaces="2"/>
+									<!-- Optional  -->
+									<!-- Repeat Factor=0-1  -->
+									<!-- Fare construction is a total amount and currency from the FareCalcLine -->
+									<!-- "Amount" (optional) Fare construction total amount.  -->
+									<!-- "CurrencyCode" (optional) Three-character fare construction currency code.  -->
+									<!-- "DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".  -->
+									<FareConstruction Amount="153.50" CurrencyCode="NUC" DecimalPlaces="2"/>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--"Amount " (optional) Equivalent amount. This is the price of the inventory excluding taxes and fees in the payabale currency.-->
+									<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+									<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+									<EquivFare Amount="16.00" CurrencyCode="USD" DecimalPlaces="2"/>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<Taxes>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-99-->
+										<!--"TaxCode" (required) Tax type code.-->
+										<!--"Amount" (optional) Tax amount.-->
+										<!--"CurrencyCode" (optional) Three-character currency code of the tax.-->
+										<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+										<Tax TaxCode="GB6" Amount="18.00" CurrencyCode="USD" DecimalPlaces="2"/>
+										<Tax TaxCode="UB6" Amount="35.30" CurrencyCode="USD" DecimalPlaces="2"/>
+										<Tax TaxCode="DE2" Amount="10.30" CurrencyCode="USD" DecimalPlaces="2"/>
+										<Tax TaxCode="RA1" Amount="27.50" CurrencyCode="USD" DecimalPlaces="2"/>
+										<Tax TaxCode="YQF" Amount="25.80" CurrencyCode="USD" DecimalPlaces="2"/>
+										<Tax TaxCode="YQF" Amount="25.80" CurrencyCode="USD" DecimalPlaces="2"/>
+									</Taxes>
+									<!--Optional-->
+									<!--Repeat Factor=0-unlimited-->
+									<OBFees>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-unlimited-->
+										<!--"Amount" (optional) Fee amount.-->
+										<!--"CurrencyCode" (optional) Three-character currency code of the fee.-->
+										<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+										<OBFee Amount="45.50" CurrencyCode="USD" DecimalPlaces="2"/>
+									</OBFees>
+									<!--Mandatory-->
+									<!--Repeat Factor=1-->
+									<!--"Amount" (optional) Total fare amount.-->
+									<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+									<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+									<TotalFare Amount="158.70" CurrencyCode="USD" DecimalPlaces="2"/>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<TPA_Extensions>
+										<!--Optional-->
+										<!--Repeat Factor=0-unlimited-->
+										<!--Surcharge amounts for this passenger fare in the fare's currency.-->
+										<!--"Ind" (optional) One-letter type code of the surcharge.-->
+										<!--"Type" (optional) Type of the surcharge.-->
+										<Surcharges Ind="Q" Type="UNK">4.08</Surcharges>
+										<Surcharges Ind="Q" Type="UNK">4.08</Surcharges>
+									</TPA_Extensions>
+								</PassengerFare>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<!--"NonRefundableIndicator" (optional) Indicator for whether a fare is refundable or not. The value is "true" for a non-refundable fare, "false" for a refundable fare.-->
+								<Endorsements NonRefundableIndicator="true"/>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<TPA_Extensions>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--"Info" (optional) Returns the fare calculation line for flight options.-->
+									<FareCalcLine Info="LON LH FRA8.07E99F LH LON8.07E99F NUC16.14END ROE0.618831"/>
+								</TPA_Extensions>
+							</PTC_FareBreakdown>
+						</PTC_FareBreakdowns>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<!--Collection of FareInfo elements.-->
+						<FareInfos>
+							<!--Mandatory-->
+							<!--Repeat Factor=1-10-->
+							<!--Fare info/additional info about each flight segment. There will be one FareInfo element for every corresponding FlightSegment element in the itinerary.-->
+							<FareInfo>
+								<!--Mandatory-->
+								<!--Repeat Factor=1-->
+								<!--Booking code for the corresponding FlightSegment in the itinerary for this fare.-->
+								<FareReference>E</FareReference>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<TPA_Extensions>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--"Number" (optional) Number of seats remaining.-->
+									<SeatsRemaining Number="9" BelowMin="false"/>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--"Cabin" (optional) Cabin code for the corresponding FlightSegment in the itinerary for this fare.-->
+									<!--Cabin="P" - Premium First class cabin.-->
+									<!--Cabin="F" - First class cabin.-->
+									<!--Cabin="J" - Premium Business class cabin.-->
+									<!--Cabin="C" - Business class cabin.-->
+									<!--Cabin="S" - Premium Economy class cabin.-->
+									<!--Cabin="Y" - Economy class cabin.-->
+									<Cabin Cabin="Y"/>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--"Code" (optional) Meal code.-->
+									<Meal Code="S"/>
+								</TPA_Extensions>
+							</FareInfo>
+							<FareInfo>
+								<FareReference>E</FareReference>
+								<TPA_Extensions>
+									<SeatsRemaining Number="9" BelowMin="false"/>
+									<Cabin Cabin="Y"/>
+									<Meal Code="S"/>
+								</TPA_Extensions>
+							</FareInfo>
+						</FareInfos>
+						<!--Optional-->
+						<!--Repeat Factor=0-1-->
+						<TPA_Extensions>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--"Indicator" (optional) - For multiple passenger requests, if passenger types have different booking codes for their fares, they must be booked in different PNRs. For example, if the ADT must be booked in Q and the CNN must be booked in V, these cannot be booked in the same PNR. This indicator alerts you to these types of situations.-->
+							<DivideInParty Indicator="false"/>
+							<!--Optional-->
+							<!--Repeat Factor=0-1-->
+							<!--Ancillary fee groups returned.-->
+							<!--"Message" (optional) Message returned from MIP when no fees are found for this itinerary.-->
+							<AncillaryFeeGroups Message="No Ancillary Fees found">
+								<!--Optional-->
+								<!--Repeat Factor=0-unlimited-->
+								<!--Ancillary fee group returned.-->
+								<!--"Code" (required) Fee group code assigned by ATPCO.-->
+								<!--Code="BG" Baggage.-->
+								<!--Code="IE" In-flight entertainment.-->
+								<!--Code="ML" Meals.-->
+								<!--Code="SA" Seats.-->
+								<!--Code="UN" Unaccompanied passenger.-->
+								<!--"Name" (required) Group name.-->
+								<!--"Message" (optional) Message returned from MIP.-->
+								<AncillaryFeeGroup Code="IE" Name="IN-FLIGHT ENTERTAINMENT">
+									<!--Optional-->
+									<!--Repeat Factor=0-unlimited-->
+									<!--OC fee returned.-->
+									<!--"Amount" (required) Fee amount.-->
+									<!--"Description" (optional) Fee description.-->
+									<!--"OriginAirport" (required) Three-character code for the origin airport.-->
+									<!--"DestinationAirport" (required) Three-character code for the destination airport.-->
+									<!--"Carrier" (required) Two-character carrier code for the operating airline.-->
+									<!--"PassengerCode" (required) Passenger type code.-->
+									<!--"Date" (optional) Date for this fee.-->
+									<!--"StartSegment" (required) Start travel segment.-->
+									<!--"EndSegment" (required) End travel segment.-->
+									<AncillaryFeeItem Amount="10.00" Description="INTERNET ACCESS" OriginAirport="LHR" DestinationAirport="FRA" Carrier="LH" PassengerCode="ADT" Date="2009-12-25" StartSegment="1" EndSegment="1"/>
+								</AncillaryFeeGroup>
+								<AncillaryFeeGroup Code="GT" Name="GROUND TRANSPORTATION" Message="AIR EXTRAS NOT APPLICABLE OR ARE UNKNOWN"/>
+							</AncillaryFeeGroups>
+						</TPA_Extensions>
+						<Tickets>
+							<!--Optional-->
+							<!--Repeat factor=1-inf -->
+							<Ticket Number="1">
+								<!--Optional-->
+								<!--Repeat factor=0-1-->
+								<!--Indicates which flights are covered by this ticket -->
+								<OriginDestinationOptions>
+									<!--Optional-->
+									<!--Repeat factor=0-99-->
+									<OriginDestinationOption>
+										<!--Optional-->
+										<!--Repeat factor=0-4-->
+										<!--"DepartureDateTime" (required) -->
+										<FlightSegment DepartureDateTime="String">
+											<!--Optional-->
+											<!--Repeat factor=0-1-->
+											<!--Departure point of segment-->
+											<!--"LocationCode" (required) -->
+											<!--"CodeContext" (optional) Identifies the context of the identifying code, such as IATA, ARC, or internal code, etc.-->
+											<DepartureAirport LocationCode="ABC" CodeContext="IATA">String</DepartureAirport>
+											<!--Optional-->
+											<!--Repeat factor=0-1-->
+											<!--Departure point of segment-->
+											<!--"LocationCode" (required) -->
+											<!--"CodeContext" (optional) Identifies the context of the identifying code, such as IATA, ARC, or internal code, etc.-->
+											<ArrivalAirport LocationCode="ABC" CodeContext="IATA">String</ArrivalAirport>
+										</FlightSegment>
+									</OriginDestinationOption>
+								</OriginDestinationOptions>
+								<!--Optional-->
+								<!--Repeat Factor=0-1-->
+								<!--"PricingSource" (optional) Source of the itinerary (internal Sabre Shopping Service name).-->
+								<!--"LastTicketDate" (optional) Last date this fare can be booked.-->
+								<!--"PrivateFareType" (optional) Type of private fare.-->
+								<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+								<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+								<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+								<!--PrivateFareType="@" - All other private fares.-->
+								<!--"AlternateCityOption" (optional) Indicator for whether this option is an alternate city option.-->
+								<!--AlternateCityOption="true" Indicates that this option is an alternate city option.-->
+								<!--AlternateCityOption="false" (default) Indicates that this option is not an alternate city option.-->
+								<!-- SpanishFamilyDiscountIndicator (optional). Spanish Discount indicator with values of "A", "B", "C" where "A" indicates Spanish Large Family discount only, "B" indicates Spanish Large Family discount + Spanish Islander discount, "C" indicates Spanish Islander discount only-->
+								<!-- PricingSubSource, value returned by internal Sabre Shopping Service system-->
+								<!-- FlexibleFareID (optional). If the fare is an additional flexible fare, this is the fare group ID-->
+								<AirItineraryPricingInfo PricingSource="JRI4" LastTicketDate="2009-09-11" PrivateFareType="/" AlternateCityOption="false" SpanishFamilyDiscountIndicator="A" FlexibleFareID="2">
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--Total price of the itinerary.-->
+									<ItinTotalFare>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-->
+										<!--"Amount" (optional) Base fare amount.-->
+										<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+										<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+										<BaseFare Amount="10.00" CurrencyCode="GBP" DecimalPlaces="2"/>
+										<!-- Optional  -->
+										<!-- Repeat Factor=0-1  -->
+										<!-- Fare construction is a total amount and currency from the FareCalcLine -->
+										<!-- "Amount" (optional) Fare construction total amount.  -->
+										<!-- "CurrencyCode" (optional) Three-character fare construction currency code.  -->
+										<!-- "DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".  -->
+										<FareConstruction Amount="153.50" CurrencyCode="NUC" DecimalPlaces="2"/>
+										<!--Optional-->
+										<!--Repeat Factor=0-1-->
+										<!--"Amount" (optional) Equivalent amount.-->
+										<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+										<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+										<EquivFare Amount="16.00" CurrencyCode="USD" DecimalPlaces="2"/>
+										<!--Optional-->
+										<!--Repeat Factor=0-1-->
+										<Taxes>
+											<!--Mandatory-->
+											<!--Repeat Factor=1-99-->
+											<!--"TaxCode" (required) Tax type code.-->
+											<!--"Amount" (optional) Tax amount.-->
+											<!--"CurrencyCode" (optional) Three-character currency code of the tax.-->
+											<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+											<Tax TaxCode="TOTALTAX" Amount="142.70" CurrencyCode="USD" DecimalPlaces="2"/>
+										</Taxes>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-->
+										<!--"Amount" (optional) Total price passengers pay (includes fare, taxes, and fees).-->
+										<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+										<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+										<TotalFare Amount="158.70" CurrencyCode="USD" DecimalPlaces="2"/>
+										<!--Optional-->
+										<!--Repeat Factor=0-1-->
+										<!--Air Extras total summary amount.-->
+										<!--"Amount" (required) Total monetary amount of the Air Extras.-->
+										<Extras Amount="10.00"/>
+										<!--Optional-->
+										<!--Repeat Factor=0-1-->
+										<!--Total price including Air Extras.-->
+										<!--"Amount" (required) Total monetary amount including the Air Extras.-->
+										<TotalWithExtras Amount="168.70"/>
+									</ItinTotalFare>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--Passenger fare breakdowns.-->
+									<PTC_FareBreakdowns>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-20-->
+										<!--One PTC_FareBreakdown element for each type of passenger. For example, if the request is for two ADT (adult) and one CNN (child), two PTC_FareBreakdown elements exist, one for two ADT and one for the CNN passenger. If the CNN passenger fare is not available, an ADT fare will return (in its own PTC_FareBreakdown element).-->
+										<!--"PrivateFareType" (optional) Type of private fare.-->
+										<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+										<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+										<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+										<!--PrivateFareType="@" - All other private fares.-->
+										<PTC_FareBreakdown PrivateFareType="/">
+											<!--Mandatory-->
+											<!--Repeat Factor=1-->
+											<!--"Code" (optional) Passenger type code.-->
+											<!--"Quantity" (optional) Number of passengers for this passenger type code.-->
+											<PassengerTypeQuantity Code="ADT" Quantity="1"/>
+											<!--Mandatory-->
+											<!--Repeat Factor=1-->
+											<!--Collection of FareBasisCode elements.-->
+											<FareBasisCodes>
+												<!--Mandatory-->
+												<!--Repeat Factor=1-10-->
+												<!--Fare basis code.-->
+												<!--"PrivateFareType" (optional) Type of private fare.-->
+												<!--PrivateFareType="*" - Fares filed with a corporate ID or account code.-->
+												<!--PrivateFareType="/" - Fare marked up via Category 35 (Negotiated Fares).-->
+												<!--PrivateFareType="X" - Ticketing ineligible Category 35 fares.-->
+												<!--PrivateFareType="@" - All other private fares.-->
+												<!--"BookingCode" (optional) Booking code.-->
+												<!--DepartureAirportCode (optional) - Departure point of flight segment -->
+												<!--ArrivalAirportCode (optional) - Arrival point of flight segment -->
+												<!--AvailabilityBreak (optional) - value returned by internal Sabre Shopping Service system-->
+												<!--AccountCode (optional), Matched Account Code-->
+												<FareBasisCode PrivateFareType="/" BookingCode="E">E99F</FareBasisCode>
+												<FareBasisCode PrivateFareType="/" BookingCode="E">E99F</FareBasisCode>
+											</FareBasisCodes>
+											<!--Mandatory-->
+											<!--Repeat Factor=1-->
+											<!--The total passenger fare with cost breakdown.-->
+											<PassengerFare>
+												<!--Mandatory-->
+												<!--Repeat Factor=1-->
+												<!--"Amount " (optional) Base fare amount. Base fare is the price of the inventory excluding taxes and fees.-->
+												<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+												<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+												<BaseFare Amount="10.00" CurrencyCode="GBP" DecimalPlaces="2"/>
+												<!-- Optional  -->
+												<!-- Repeat Factor=0-1  -->
+												<!-- Fare construction is a total amount and currency from the FareCalcLine -->
+												<!-- "Amount" (optional) Fare construction total amount.  -->
+												<!-- "CurrencyCode" (optional) Three-character fare construction currency code.  -->
+												<!-- "DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".  -->
+												<FareConstruction Amount="153.50" CurrencyCode="NUC" DecimalPlaces="2"/>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<!--"Amount " (optional) Equivalent amount. This is the price of the inventory excluding taxes and fees in the payabale currency.-->
+												<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+												<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+												<EquivFare Amount="16.00" CurrencyCode="USD" DecimalPlaces="2"/>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<Taxes>
+													<!--Mandatory-->
+													<!--Repeat Factor=1-99-->
+													<!--"TaxCode" (required) Tax type code.-->
+													<!--"Amount" (optional) Tax amount.-->
+													<!--"CurrencyCode" (optional) Three-character currency code of the tax.-->
+													<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+													<Tax TaxCode="GB6" Amount="18.00" CurrencyCode="USD" DecimalPlaces="2"/>
+													<Tax TaxCode="UB6" Amount="35.30" CurrencyCode="USD" DecimalPlaces="2"/>
+													<Tax TaxCode="DE2" Amount="10.30" CurrencyCode="USD" DecimalPlaces="2"/>
+													<Tax TaxCode="RA1" Amount="27.50" CurrencyCode="USD" DecimalPlaces="2"/>
+													<Tax TaxCode="YQF" Amount="25.80" CurrencyCode="USD" DecimalPlaces="2"/>
+													<Tax TaxCode="YQF" Amount="25.80" CurrencyCode="USD" DecimalPlaces="2"/>
+													<!-- Optional -->
+													<!-- Repeat Factor=0-1-->
+													<TotalTax Amount="142.70" CurrencyCode="USD" DecimalPlaces="2"/>
+												</Taxes>
+												<!--Optional-->
+												<!--Repeat Factor=0-unlimited-->
+												<OBFees>
+													<!--Mandatory-->
+													<!--Repeat Factor=1-unlimited-->
+													<!--"Amount" (optional) Fee amount.-->
+													<!--"CurrencyCode" (optional) Three-character currency code of the fee.-->
+													<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+													<OBFee Amount="45.50" CurrencyCode="USD" DecimalPlaces="2"/>
+												</OBFees>
+												<!--Mandatory-->
+												<!--Repeat Factor=1-->
+												<!--"Amount" (optional) Total fare amount.-->
+												<!--"CurrencyCode" (optional) Three-character currency code of the fare.-->
+												<!--"DecimalPlaces" (optional) Number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".-->
+												<TotalFare Amount="158.70" CurrencyCode="USD" DecimalPlaces="2"/>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<TPA_Extensions>
+													<!--Optional-->
+													<!--Repeat Factor=0-unlimited-->
+													<!--Surcharge amounts for this passenger fare in the fare's currency.-->
+													<!--"Ind" (optional) One-letter type code of the surcharge.-->
+													<!--"Type" (optional) Type of the surcharge.-->
+													<Surcharges Ind="Q" Type="UNK">4.08</Surcharges>
+													<Surcharges Ind="Q" Type="UNK">4.08</Surcharges>
+												</TPA_Extensions>
+											</PassengerFare>
+											<!--Optional-->
+											<!--Repeat Factor=0-1-->
+											<!--"NonRefundableIndicator" (optional) Indicator for whether a fare is refundable or not. The value is "true" for a non-refundable fare, "false" for a refundable fare.-->
+											<Endorsements NonRefundableIndicator="true"/>
+											<!--Optional-->
+											<!--Repeat Factor=0-1-->
+											<TPA_Extensions>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<!--"Info" (optional) Returns the fare calculation line for flight options.-->
+												<FareCalcLine Info="LON LH FRA8.07E99F LH LON8.07E99F NUC16.14END ROE0.618831"/>
+											</TPA_Extensions>
+										</PTC_FareBreakdown>
+									</PTC_FareBreakdowns>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<!--Collection of FareInfo elements.-->
+									<FareInfos>
+										<!--Mandatory-->
+										<!--Repeat Factor=1-10-->
+										<!--Fare info/additional info about each flight segment. There will be one FareInfo element for every corresponding FlightSegment element in the itinerary.-->
+										<FareInfo>
+											<!--Mandatory-->
+											<!--Repeat Factor=1-->
+											<!--Booking code for the corresponding FlightSegment in the itinerary for this fare.-->
+											<FareReference>E</FareReference>
+											<!--Optional-->
+											<!--Repeat Factor=0-1-->
+											<TPA_Extensions>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<!--"Number" (optional) Number of seats remaining.-->
+												<SeatsRemaining Number="9" BelowMin="false"/>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<!--"Cabin" (optional) Cabin code for the corresponding FlightSegment in the itinerary for this fare.-->
+												<!--Cabin="P" - Premium First class cabin.-->
+												<!--Cabin="F" - First class cabin.-->
+												<!--Cabin="J" - Premium Business class cabin.-->
+												<!--Cabin="C" - Business class cabin.-->
+												<!--Cabin="S" - Premium Economy class cabin.-->
+												<!--Cabin="Y" - Economy class cabin.-->
+												<Cabin Cabin="Y"/>
+												<!--Optional-->
+												<!--Repeat Factor=0-1-->
+												<!--"Code" (optional) Meal code.-->
+												<Meal Code="S"/>
+											</TPA_Extensions>
+										</FareInfo>
+										<FareInfo>
+											<FareReference>E</FareReference>
+											<TPA_Extensions>
+												<SeatsRemaining Number="9" BelowMin="false"/>
+												<Cabin Cabin="Y"/>
+												<Meal Code="S"/>
+											</TPA_Extensions>
+										</FareInfo>
+									</FareInfos>
+									<!--Optional-->
+									<!--Repeat Factor=0-1-->
+									<TPA_Extensions>
+										<!--Optional-->
+										<!--Repeat Factor=0-1-->
+										<!--"Indicator" (optional) - For multiple passenger requests, if passenger types have different booking codes for their fares, they must be booked in different PNRs. For example, if the ADT must be booked in Q and the CNN must be booked in V, these cannot be booked in the same PNR. This indicator alerts you to these types of situations.-->
+										<DivideInParty Indicator="false"/>
+										<!--Optional-->
+										<!--Repeat Factor=0-1-->
+										<!--Ancillary fee groups returned.-->
+										<!--"Message" (optional) Message returned from MIP when no fees are found for this itinerary.-->
+										<AncillaryFeeGroups Message="No Ancillary Fees found">
+											<!--Optional-->
+											<!--Repeat Factor=0-unlimited-->
+											<!--Ancillary fee group returned.-->
+											<!--"Code" (required) Fee group code assigned by ATPCO.-->
+											<!--Code="BG" Baggage.-->
+											<!--Code="IE" In-flight entertainment.-->
+											<!--Code="ML" Meals.-->
+											<!--Code="SA" Seats.-->
+											<!--Code="UN" Unaccompanied passenger.-->
+											<!--"Name" (required) Group name.-->
+											<!--"Message" (optional) Message returned from MIP.-->
+											<AncillaryFeeGroup Code="IE" Name="IN-FLIGHT ENTERTAINMENT">
+												<!--Optional-->
+												<!--Repeat Factor=0-unlimited-->
+												<!--OC fee returned.-->
+												<!--"Amount" (required) Fee amount.-->
+												<!--"Description" (optional) Fee description.-->
+												<!--"OriginAirport" (required) Three-character code for the origin airport.-->
+												<!--"DestinationAirport" (required) Three-character code for the destination airport.-->
+												<!--"Carrier" (required) Two-character carrier code for the operating airline.-->
+												<!--"PassengerCode" (required) Passenger type code.-->
+												<!--"Date" (optional) Date for this fee.-->
+												<!--"StartSegment" (required) Start travel segment.-->
+												<!--"EndSegment" (required) End travel segment.-->
+												<AncillaryFeeItem Amount="10.00" Description="INTERNET ACCESS" OriginAirport="LHR" DestinationAirport="FRA" Carrier="LH" PassengerCode="ADT" Date="2009-12-25" StartSegment="1" EndSegment="1"/>
+											</AncillaryFeeGroup>
+											<AncillaryFeeGroup Code="GT" Name="GROUND TRANSPORTATION" Message="AIR EXTRAS NOT APPLICABLE OR ARE UNKNOWN"/>
+										</AncillaryFeeGroups>
+									</TPA_Extensions>
+								</AirItineraryPricingInfo>
+								<!--Optional-->
+								<!--Repeat factor=0-5-->
+								<!--Provides for free form descriptive information for the priced itinerary. -->
+								<!--"Language" (optional) -->
+								<Notes Language="en-us">Some note...</Notes>
+								<!--Optional-->
+								<!--Repeat factor=0-1-->
+								<!-->Container for TicketingInfoRS_Type -->
+								<!--"eTicketNumber" (optional) If reservation is electronically ticketed at time of booking, this is the field for the eTicket number. -->
+								<!--"TicketType" (required) Indicates the type of ticket (Paper, eTicket) -->
+								<!--"ValidInterline"  (optional) Indicates validation of interline ticketing agreement, possible values: Yes, No, Unknown-->
+								<TicketingInfo ValidInterline="Unknown" TicketType="eTicket" eTicketNumber="0">
+									<!--Optional-->
+									<!--Repeat factor=0-10-->
+									<!--Open text field available for additional ticket information. -->
+									<!--"Language" (optional) -->
+									<TicketAdvisory Language="en-us">String</TicketAdvisory>
+									<!--Optional-->
+									<!--Placeholder for additional elements-->
+									<TPA_Extensions>String</TPA_Extensions>
+								</TicketingInfo>
+							</Ticket>
+						</Tickets>
+					</AirItineraryPricingInfo>
+					<Notes Language="en-us">Some note...</Notes>
+					<TicketingInfo TicketType="eTicket" ValidInterline="Unknown"/>
+				</AdditionalFares>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--The source of the itinerary-->
+				<!--"Source" (required) The name of the source.-->
+				<ItinSource Source="SOURCE"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--"Code" (optional) Two-character validating carrier code.-->
+				<ValidatingCarrier Code="LH"/>
+				<!--Optional-->
+				<!--Repeat Factor=0-1-->
+				<!--Information returning the Total Itinerary Score ((Penalty * price) divided by 10) by which itins are sorted in Diversity Swapper-->
+				<!--WeighedPriceAmount (required)-->
+				<DiversitySwapper WeighedPriceAmount="3.141"/>
+			</TPA_Extensions>
+		</PricedItinerary>
+	</PricedItineraries>
+	<TPA_Extensions/>
+</OTA_AirLowFareSearchRS>

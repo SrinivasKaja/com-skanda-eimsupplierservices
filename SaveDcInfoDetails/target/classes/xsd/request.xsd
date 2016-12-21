@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	targetNamespace="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/"
+	xmlns:pfx="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/"
+	elementFormDefault="qualified" attributeFormDefault="qualified">
+
+	<xs:complexType name="RequesterDetails">
+		<xs:sequence>
+			<xs:element name="requestId" type="xs:string" minOccurs="0" />
+			<xs:element name="sessionID" type="xs:string" minOccurs="0" />
+			<xs:element name="appID" type="xs:string" minOccurs="0" />
+			<xs:element name="userName" type="xs:string" minOccurs="0" />
+			<xs:element name="requesterType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="pseudoCityCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="companyName" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="OriginDestinationInformation">
+		<xs:sequence>
+		<xs:element name="departureDateTime" type="xs:string" minOccurs="0" />
+		<xs:element name="arrivalDateTime" type="xs:string" minOccurs="0" />
+		<xs:element name="departureWindow" type="xs:string" minOccurs="0" />
+		<xs:element name="arrivalWindow" type="xs:string" minOccurs="0" />
+		<xs:element name="originLocation" type="xs:string" minOccurs="0" />
+		<xs:element name="destinationLocation" type="xs:string" minOccurs="0" />
+		<xs:element name="originAirportCode" type="xs:string" minOccurs="0" />
+		<xs:element name="destinationAirportCode" type="xs:string" minOccurs="0" />
+		
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TravelPreferences">
+		<xs:sequence>
+		<xs:element name="flightTypePref" type="xs:string" minOccurs="0" />
+		<xs:element name="cabinPref" type="xs:string" minOccurs="0" />
+		<xs:element name="eTicketDesired" type="xs:string" minOccurs="0" />
+		<xs:element name="validInterlineTicket" type="xs:string" minOccurs="0" />
+		<xs:element name="xoFares" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TravelerInfoSummary">
+		<xs:sequence>
+		<xs:element name="seatsRequested" type="xs:string" minOccurs="0" /> 
+		<xs:element name="passengerTypeQuantity" type="xs:string" minOccurs="1" maxOccurs="4" />
+		<xs:element name="pricePriority" type="xs:string" minOccurs="0" />
+		<xs:element name="directFlightsPriority" type="xs:string" minOccurs="0" />
+		<xs:element name="timePriority" type="xs:string" minOccurs="0" />
+		<xs:element name="vendorPriority" type="xs:string" minOccurs="0" />	
+		<xs:element name="specificPTC_Indicator" type="xs:string" minOccurs="0" />
+		
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TPA_Extensions">
+		<xs:sequence>
+		<xs:element name="requestType" type="xs:string" minOccurs="0" />
+		<xs:element name="compressResponse" type="xs:string" minOccurs="0" />
+		<xs:element name="specifiedLocation" type="xs:string" minOccurs="0" />
+		<xs:element name="alternateLocation" type="xs:string" minOccurs="0" />
+		
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="AirLowFareSearchRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="requesterDetails" type="pfx:RequesterDetails"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="originDestinationInformation" type="pfx:OriginDestinationInformation"
+					minOccurs="0" maxOccurs = "10"/>
+				<xs:element name="travelPreferences" type="pfx:TravelPreferences" maxOccurs = "unbounded"/>
+				<xs:element name="travelerInfoSummary" type="pfx:TravelerInfoSummary" maxOccurs = "unbounded"/>
+				<xs:element name="tpaextensions" type="pfx:TPA_Extensions" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

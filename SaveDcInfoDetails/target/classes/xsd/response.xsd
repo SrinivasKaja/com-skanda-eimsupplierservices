@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/"
+	xmlns:pfx="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/"
+	elementFormDefault="qualified" attributeFormDefault="qualified">
+
+	<xs:complexType name="RequesterDetails">
+		<xs:sequence>
+			<xs:element name="requestId" type="xs:string" minOccurs="0" />
+			<xs:element name="sessionID" type="xs:string" minOccurs="0" />
+			<xs:element name="appID" type="xs:string" minOccurs="0" />
+			<xs:element name="userName" type="xs:string" minOccurs="0" />
+			<xs:element name="requesterType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="pseudoCityCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="companyName" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PricedItinerary">
+		<xs:sequence>
+			<xs:element name="sequenceNumber" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="airItinerary" type="pfx:AirItinerary"
+				minOccurs="0" maxOccurs= "unbounded"/>
+			<xs:element name="airItineraryPricingInfo" type="pfx:AirItineraryPricingInfo"
+				minOccurs="0" maxOccurs = "unbounded"/>
+			<xs:element name="ticketingInfo" type="pfx:TicketingInfo"
+				minOccurs="0" />
+			<xs:element name="tPA_Extensions" type="pfx:TPA_Extensions"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TicketingInfo">
+		<xs:sequence>
+			<xs:element name="ticketType" type="xs:string" minOccurs="0" />
+			<xs:element name="validInterline" type="xs:string"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PTC_FareBreakdowns">
+		<xs:sequence>
+			<xs:element name="ptc_FareBreakdown" type="pfx:PTC_FareBreakdown" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FareBasisCodes">
+		<xs:sequence>
+			<xs:element name="fareBasisCode" type="pfx:FareBasisCode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FareBasisCode">
+		<xs:sequence>
+			<xs:element name="privateFareType" type="xs:string" minOccurs="0" />
+			<xs:element name="bookingCode" type="xs:string" minOccurs="0" />
+			<xs:element name="departureAirportCode" type="xs:string" minOccurs="0" />
+			<xs:element name="arrivalAirportCode" type="xs:string" minOccurs="0" />
+			<xs:element name="fareComponentBeginAirport" type="xs:string" minOccurs="0" />
+			<xs:element name="availabilityBreak" type="xs:string" minOccurs="0" />
+			<xs:element name="fareComponentEndAirport" type="xs:string" minOccurs="0" />
+			<xs:element name="fareComponentDirectionality" type="xs:string" minOccurs="0" />
+			<xs:element name="fareBasisCode" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Taxes">
+		<xs:sequence>
+			<xs:element name="tax" type="pfx:Tax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Tax">
+		<xs:sequence>
+			<xs:element name="taxCode" type="xs:string" minOccurs="0" />
+			<xs:element name="amount" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="decimalPlaces" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Surcharges">
+		<xs:sequence>
+			<xs:element name="surcharges" type="xs:string" minOccurs="0" />
+			<xs:element name="surchargesInd" type="xs:string" minOccurs="0" />
+			<xs:element name="surchargesType" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Messages">
+		<xs:sequence>
+			<xs:element name="message" type="pfx:Message" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Message">
+		<xs:sequence>
+			<xs:element name="message" type="xs:string" minOccurs="0" />
+			<xs:element name="messageType" type="xs:string" minOccurs="0" />
+			<xs:element name="AirlineCode" type="xs:string" minOccurs="0" />
+			<xs:element name="failCode" type="xs:string" minOccurs="0" />
+			<xs:element name="info" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaggageInformationList">
+		<xs:sequence>
+			<xs:element name="baggageInformation" type="pfx:BaggageInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaggageInformation">
+		<xs:sequence>
+			<xs:element name="segmentId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="allowance" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PassengerFare">
+		<xs:sequence>
+			<xs:element name="baseFareAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="baseFareCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="fareConstructionAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="fareConstructionCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCodeDecimalPlaces" type="xs:string" minOccurs="0" />
+			<xs:element name="equivFareAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="equivFareCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="equivFareDecimalPlaces" type="xs:string" minOccurs="0" />
+			<xs:element name="taxes" type="pfx:Taxes" minOccurs="0" />
+			<xs:element name="TotalFareAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="TotalFareCurrencyAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="surcharges" type="pfx:Surcharges" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="messages" type="pfx:Messages" minOccurs="0" />
+			<xs:element name="baggageInformationList" type="pfx:BaggageInformationList" minOccurs="0" />
+			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PTC_FareBreakdown">
+		<xs:sequence>
+			<xs:element name="privateFareType" type="xs:string" minOccurs="0" />
+			<xs:element name="passengerTypeQuantityCode" type="xs:string" minOccurs="0" />
+			<xs:element name="passengerTypeQuantity" type="xs:string" minOccurs="0" />
+			<xs:element name="nonRefundableIndicator" type="xs:string" minOccurs="0" />
+			<xs:element name="fareBasisCodes" type = "pfx:FareBasisCodes" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="passengerFare" type = "pfx:PassengerFare" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="fareInfos" type = "pfx:FareInfos" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirItineraryPricingInfo">
+		<xs:sequence>
+			<xs:element name="pricingSource" type="xs:string" minOccurs="0" />
+			<xs:element name="pricingSubSource" type="xs:string" minOccurs="0" />
+			<xs:element name="fareReturned" type="xs:string" minOccurs="0" />
+			<xs:element name="privateFareType" type="xs:string" minOccurs="0" />
+			<xs:element name="itinTotalFare" type="pfx:ItinTotalFare" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="pTC_FareBreakdowns" type = "pfx:PTC_FareBreakdowns" minOccurs="0" />
+			<xs:element name="divideInPartyInd" type = "xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ItinTotalFare">
+		<xs:sequence>
+			<xs:element name="BaseFareAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="BaseFareCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="BaseFareDecimalPlaces" type="xs:string" minOccurs="0" />
+			<xs:element name="FareConstructionAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="FareConstructionCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="FareConstructionDecimalPlaces" type="xs:string" minOccurs="0" />
+			<xs:element name="EquivFareAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="EquivFareCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="EquivFareDecimalPlaces" type="xs:string" minOccurs="0" />
+			<xs:element name="TaxCode" type="xs:string" minOccurs="0" />
+			<xs:element name="TaxAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="TaxCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="TaxDecimalPlaces" type="xs:string" minOccurs="0" />
+			<xs:element name="TotalFareAmount" type="xs:string" minOccurs="0" />
+			<xs:element name="TotalFareCurrencyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="TotalFareDecimalPlaces" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FareInfos">
+		<xs:sequence>
+			<xs:element name="fareInfo" type="pfx:FareInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FareInfo">
+		<xs:sequence>
+			<xs:element name="fareReference" type="xs:string" minOccurs="0" />
+			<xs:element name="seatsRemaining" type="xs:string" minOccurs="0" />
+			<xs:element name="belowMin" type="xs:string" minOccurs="0" />
+			<xs:element name="cabin" type="xs:string" minOccurs="0" />
+			<xs:element name="mealcode" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OriginDestinationOption">
+		<xs:sequence>
+			<xs:element name="elapsedTime" type="xs:string" minOccurs="0" />
+			<xs:element name="flightSegment" type="pfx:FlightSegment" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FlightSegment">
+		<xs:sequence>
+			<xs:element name="departureDateTime" type="xs:string" minOccurs="0" />
+			<xs:element name="arrivalDateTime" type="xs:string" minOccurs="0" />
+			<xs:element name="stopQuantity" type="xs:string" minOccurs="0" />
+			<xs:element name="flightNumber" type="xs:string" minOccurs="0" />
+			<xs:element name="resBookDesigCode" type="xs:string" minOccurs="0" />
+			<xs:element name="elapsedTime" type="xs:string" minOccurs="0" />
+			<xs:element name="departureAirportLocationCode" type="xs:string" minOccurs="0" />
+			<xs:element name="arrivalAirportLocationCode" type="xs:string" minOccurs="0" />
+			<xs:element name="departureAirportTerminalID" type="xs:string" minOccurs="0" />
+			<xs:element name="arrivalAirportTerminalID" type="xs:string" minOccurs="0" />
+			<xs:element name="airEquipType" type="xs:string" minOccurs="0" />
+			<xs:element name="operatingAirlineCode" type="xs:string" minOccurs="0" />
+			<xs:element name="operatingAirlineFlightNbr" type="xs:string" minOccurs="0" />
+			<xs:element name="marketingAirlineCode" type="xs:string" minOccurs="0" />
+			<xs:element name="departureTimeZone" type="xs:string" minOccurs="0" />
+			<xs:element name="arrivalTimeZone" type="xs:string" minOccurs="0" />
+			<xs:element name="eTicketInd" type= "xs:string" minOccurs="0" />
+			<xs:element name="originAirportCode" type="xs:string" minOccurs="0" />
+			<xs:element name="destinationAirportCode" type="xs:string" minOccurs="0" />
+			
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirItinerary">
+		<xs:sequence>
+		<xs:element name="directionInd" type="xs:string" />
+			<xs:element name="originDestinationOption" type="pfx:OriginDestinationOption"
+				minOccurs="1" maxOccurs="50" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PricedItineraries">
+		<xs:sequence>
+			<xs:element name="pricedItinerary" type="pfx:PricedItinerary"
+				minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TravelPreferences">
+		<xs:sequence>
+			<xs:element name="flightTypePref" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="cabinPref" type="xs:string" minOccurs="0" />
+			<xs:element name="eTicketDesired" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="validInterlineTicket" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="xoFares" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TravelerInfoSummary">
+		<xs:sequence>
+			<xs:element name="seatsRequested" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="passengerTypeQuantity" type="xs:string"
+				minOccurs="1" maxOccurs="4" />
+			<xs:element name="pricePriority" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="directFlightsPriority" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="timePriority" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="vendorPriority" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="specificPTC_Indicator" type="xs:string"
+				minOccurs="0" />
+
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TPA_Extensions">
+		<xs:sequence>
+			<xs:element name="validatingCarrierCode" type="xs:string"
+				minOccurs="0" />
+				<xs:element name="eTicket" type="xs:string"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="AirLowFareSearchRS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="requesterDetails" type="pfx:RequesterDetails"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="pricedItineraries" type="pfx:PricedItineraries"
+					minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

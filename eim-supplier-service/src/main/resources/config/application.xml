@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+	http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+	
+	<import resource="classpath:config/rest/searchAir.xml" />
+
+	<import resource="classpath:config/application-rest-context-v1.xml" /> 
+
+	<!-- ==== Properties for the the whole WAR ==== -->
+	<bean id="propertyPlaceHolder" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+<!-- 				<value>classpath:properties/supplierService-application_${TC_ENV}.properties</value> -->
+				<value>classpath:environmentConfig/eimsupplierdcsservices/${TC_ENV}/supplierService-application.properties</value>
+				<value>classpath:META-INF/properties/error-messages.properties</value>
+				<value>classpath:META-INF/properties/eim-soa-constant.properties</value>
+<!-- 				<value>classpath:META-INF/properties/data-access_${TC_ENV}.properties</value> -->
+				<value>classpath:environmentConfig/eimsupplierdcsservices/${TC_ENV}/data-access.properties</value>
+				<value>classpath:environmentConfig/eimsupplierdcsservices/${TC_ENV}/eim-authentication.properties</value>
+				<value>classpath:environmentConfig/eimsupplierdcsservices/${TC_ENV}/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="password" value="tcrmservicepwd" />
+	</bean>
+
+	<!-- ==== Declaring Jasypt details ==== -->
+	<bean id="jasypt"
+		class="org.apache.camel.component.jasypt.JasyptPropertiesParser">
+		<property name="password" value="tcrmservicepwd" />
+	</bean>
+
+	<!-- ==== Declaring Properties Configurer to read encrypted properties==== -->
+	<bean id="propertyConfigurer"
+		class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="configurationEncryptor" />
+		<property name="properties" ref="propertyPlaceHolder" />
+	</bean>
+
+
+	<!-- ==== Camel context declaration ==== -->
+	<camelContext id="eimSupplierServiceCamelContext" xmlns="http://camel.apache.org/schema/spring">
+		<propertyPlaceholder propertiesParserRef="jasypt" location="ref:propertyPlaceHolder" id="properties" />
+
+		<!-- Include the route contexts -->
+		<routeContextRef ref="searchAirInfoRestRouteContextV1" />
+		<restContextRef ref="servicesRestContextV1" /> 
+
+		<restConfiguration component="servlet" bindingMode="auto" contextPath="eimsupplierservices">
+			<dataFormatProperty key="prettyPrint" value="true" />
+		</restConfiguration>
+		
+	</camelContext>
+</beans>

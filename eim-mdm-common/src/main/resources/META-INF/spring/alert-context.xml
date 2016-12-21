@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- Alert camel route context declaration -->
+	<routeContext id="alertRouteContext" xmlns="http://camel.apache.org/schema/spring">
+
+		<route id="messageOnlyAlertRoute">
+			<from uri="direct:alert:MessageOnly" />
+			<to uri="bean:emailServiceHandler?method=countFailures" />
+			<camel:setHeader headerName="Content-type">
+				<simple>text/plain</simple>
+			</camel:setHeader>
+			<choice>
+				<when>
+					<simple>${property.EMAIL_FAIL_COUNT} == null or ${property.EMAIL_FAIL_COUNT} &lt;=
+						${properties:error.email.threshold}
+					</simple>
+					<to uri="velocity:META-INF/template/ErrorMailTemplate_Operation.vm" />
+					<to
+						uri="{{mail.protocol}}://{{smtp.host}}?mail.smtp.starttls.enable=false&amp;to={{err.notification.mail.to}}&amp;subject={{err.notification.mail.subject}}&amp;from={{err.notification.mail.from}}" />
+				</when>
+			</choice>
+		</route>
+		<route id="messageOnlyAlertRouteBusiness">
+			<from uri="direct:alert:BusinessMessageOnly" />
+			<to uri="bean:emailServiceHandler?method=countFailures" />
+			<camel:setHeader headerName="Content-type">
+				<simple>text/plain</simple>
+			</camel:setHeader>
+			<choice>
+				<when>
+					<simple>${property.EMAIL_FAIL_COUNT} == null or ${property.EMAIL_FAIL_COUNT} &lt;=
+						${properties:error.email.threshold}
+					</simple>
+					<to uri="velocity:META-INF/template/ErrorMailTemplate_Business.vm" />
+					<to
+						uri="{{mail.protocol}}://{{smtp.host}}?mail.smtp.starttls.enable=false&amp;to={{err.notification.mail.to.business}}&amp;subject={{err.notification.mail.subject}}&amp;from={{err.notification.mail.from}}" />
+				</when>
+			</choice>
+		</route>
+
+		<route id="recordCountRoute">
+			<from uri="direct:alert:RecordCount" />
+			<camel:setHeader headerName="Content-type">
+				<simple>text/plain</simple>
+			</camel:setHeader>
+			<to uri="velocity:META-INF/template/MailTemplate_Summary.vm" />
+			<to
+				uri="{{mail.protocol}}://{{smtp.host}}?mail.smtp.starttls.enable=false&amp;to={{summary.notification.mail.to}}&amp;subject={{summary.notification.mail.subject}}&amp;from={{err.notification.mail.from}}" />
+		</route>
+		<route id="recordRecordCountRoute">
+			<from uri="direct:alert:TotalRecordCount" />
+			<camel:setHeader headerName="Content-type">
+				<simple>text/plain</simple>
+			</camel:setHeader>
+			<to uri="velocity:META-INF/template/MailTemplate_TotalSummary.vm" />
+			<to
+				uri="{{mail.protocol}}://{{smtp.host}}?mail.smtp.starttls.enable=false&amp;to={{summary.notification.mail.to}}&amp;subject={{summary.notification.mail.subject}}&amp;from={{err.notification.mail.from}}" />
+		</route>
+	</routeContext>
+
+	<!-- The email service handler bean -->
+	<bean id="emailServiceHandler" class="com.eim.common.handlers.EmailServiceHandler" />
+</beans>

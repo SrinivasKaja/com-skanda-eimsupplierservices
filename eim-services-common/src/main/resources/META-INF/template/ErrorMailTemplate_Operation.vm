@@ -1,0 +1,16 @@
+Hi,
+ 
+Please note the failure message below:
+At: ${exchange.properties.CamelCreatedTimestamp}
+Host: ${exchange.exchangeId.split('-')[1]}
+Exception: ${exchange.properties.CamelExceptionCaught}
+
+Here goes some more detail:
+Service Name => ${exchange.properties.ServiceName}
+Actual Exception => ${exchange.properties.CamelExceptionCaught}
+OriginalMessage => ${exchange.properties.OriginalMessage}
+
+Please check the logs for more details.
+
+Regards,
+Automated Monitoring

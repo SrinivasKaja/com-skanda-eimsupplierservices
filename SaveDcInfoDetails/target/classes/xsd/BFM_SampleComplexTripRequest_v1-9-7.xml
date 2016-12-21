@@ -1,0 +1,98 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SOAP-ENV:Header>
+		<m:MessageHeader xmlns:m="http://www.ebxml.org/namespaces/messageHeader">
+			<m:From>
+				<m:PartyId type="urn:x12.org:IO5:01">99999</m:PartyId>
+			</m:From>
+			<m:To>
+				<m:PartyId type="urn:x12.org:IO5:01">123123</m:PartyId>
+			</m:To>
+			<m:CPAId>ABC</m:CPAId>
+			<m:ConversationId>abc123</m:ConversationId>
+			<m:Service m:type="OTA">Air Shopping Service</m:Service>
+			<m:Action>BargainFinderMaxRQ</m:Action>
+			<m:MessageData>
+				<m:MessageId>mid:20001209-133003-2333@clientofsabre.com</m:MessageId>
+				<m:Timestamp>2001-02-15T11:15:12Z</m:Timestamp>
+				<m:TimeToLive>2001-02-15T11:15:12Z</m:TimeToLive>
+			</m:MessageData>
+			<m:DuplicateElimination/>
+			<m:Description>Bargain Finder Max Service</m:Description>
+		</m:MessageHeader>
+		<wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+			<wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/ACPCRTC!ICESMSLB\/CRT.LB!-4502967208763378812!141.6.6!0</wsse:BinarySecurityToken>
+		</wsse:Security>
+	</SOAP-ENV:Header>
+	<SOAP-ENV:Body>
+		<OTA_AirLowFareSearchRQ xmlns="http://www.opentravel.org/OTA/2003/05" AvailableFlightsOnly="false" DirectFlightsOnly="false" Version="1.9.7">
+			<POS>
+				<Source PseudoCityCode="PCC">
+					<RequestorID ID="1" Type="1">
+						<CompanyName Code="TN">TN</CompanyName>
+					</RequestorID>
+				</Source>
+			</POS>
+			<OriginDestinationInformation RPH="1">
+				<DepartureDateTime>2016-04-09T00:00:00</DepartureDateTime>
+				<OriginLocation LocationCode="TPE"/>
+				<DestinationLocation LocationCode="HKG"/>
+				<TPA_Extensions>
+					<SegmentType Code="X"/>
+					<IncludeVendorPref Code="CX"/>
+				</TPA_Extensions>
+			</OriginDestinationInformation>
+			<OriginDestinationInformation RPH="2">
+				<DepartureDateTime>2016-08-09T00:00:00</DepartureDateTime>
+				<OriginLocation LocationCode="HKG"/>
+				<DestinationLocation LocationCode="EWR"/>
+				<TPA_Extensions>
+					<SegmentType Code="O"/>
+					<IncludeVendorPref Code="CX"/>
+				</TPA_Extensions>
+			</OriginDestinationInformation>
+			<OriginDestinationInformation RPH="3">
+				<DepartureDateTime>2016-08-14T00:00:00</DepartureDateTime>
+				<OriginLocation LocationCode="EWR"/>
+				<DestinationLocation LocationCode="HKG"/>
+				<TPA_Extensions>
+					<SegmentType Code="X"/>
+					<IncludeVendorPref Code="CX"/>
+				</TPA_Extensions>
+			</OriginDestinationInformation>
+			<OriginDestinationInformation RPH="4">
+				<DepartureDateTime>2016-08-14T00:00:00</DepartureDateTime>
+				<OriginLocation LocationCode="HKG"/>
+				<DestinationLocation LocationCode="TPE"/>
+				<TPA_Extensions>
+					<SegmentType Code="O"/>
+					<IncludeVendorPref Code="CX"/>
+				</TPA_Extensions>
+			</OriginDestinationInformation>
+			<TravelPreferences ETicketDesired="false" SmokingAllowed="false" ValidInterlineTicket="false">
+				<CabinPref Cabin="Y" PreferLevel="Only"/>
+				<TPA_Extensions>
+					<XOFares Value="true"/>
+				</TPA_Extensions>
+			</TravelPreferences>
+			<TravelerInfoSummary SpecificPTC_Indicator="true">
+				<SeatsRequested>2</SeatsRequested>
+				<AirTravelerAvail>
+					<PassengerTypeQuantity Code="ADT" Quantity="1"/>
+					<PassengerTypeQuantity Code="CNN" Quantity="1"/>
+					<PassengerTypeQuantity Code="INF" Quantity="1"/>
+				</AirTravelerAvail>
+				<PriceRequestInformation>
+					<TPA_Extensions>
+						<PointOfSaleOverride Code="TPE"/>
+					</TPA_Extensions>
+				</PriceRequestInformation>
+			</TravelerInfoSummary>
+			<TPA_Extensions>
+				<IntelliSellTransaction>
+					<RequestType Name="100ITINS"/>
+					<CompressResponse Value="true"/>
+				</IntelliSellTransaction>
+			</TPA_Extensions>
+		</OTA_AirLowFareSearchRQ>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

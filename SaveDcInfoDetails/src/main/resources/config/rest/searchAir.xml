@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:p="http://cxf.apache.org/policy" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+	http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+	http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- air detail info details Routing Configuration using Apache Camel -->
+	<camel:routeContext id="searchAirInfoRestRouteContextV1">
+		<!-- REST Based Contract Details Route -->
+		<camel:route id="searchAirInfoRestRouteV1">
+			<camel:from uri="direct:searchAirInfoRoute" />
+			<camel:convertBodyTo type="java.lang.String" />
+<!-- 			<camel:to uri = "websocket://127.0.0.1:8080/test?sendToAll=true" />
+			<camel:log message="Request has been consumed  ${body}"
+				logName="com.skandha.eim.air" />
+ -->
+			<camel:choice>
+				<camel:when>
+					<camel:simple>${header.content-type} == 'application/json' ||
+						${header.accept} == 'application/json'
+					</camel:simple>
+			<camel:unmarshal ref="jacksonDataFormatter" />
+<!-- 			
+ 			<camel:json library="Jackson" useList="true" prettyPrint="true" unmarshalTypeName="com.skandha.eim.air.jaxb.v1.AirLowFareSearchRQ" /> 
+ 			 			</camel:unmarshal>  
+ -->				</camel:when>
+		</camel:choice>
+ 			<camel:log message="Request has been consumed  ${body}"
+				logName="com.skandha.eim.air" />
+ 			<camel:to uri="bean:dcDetailsInfoProcessorV2?method=process" />
+ 		</camel:route>
+
+
+	</camel:routeContext>
+	<bean id="dcDetailsInfoProcessorV2" class="com.skandha.eim.air.processor.DcDetailsInfoProcessorV2" />
+
+	<bean id="gsonDataFormatter" class="org.apache.camel.component.gson.GsonDataFormat">
+		<property name="unmarshalType"
+			value="com.skandha.eim.air.jaxb.v1.AirLowFareSearchRQ" />
+		<property name="fieldNamingPolicy" value="IDENTITY" />
+		<property name="prettyPrinting" value="true" />
+	</bean>
+
+	<bean id="jacksonDataFormatter" class="org.apache.camel.component.jackson.JacksonDataFormat">
+		<property name="unmarshalType"
+			value="com.skandha.eim.air.jaxb.v1.AirLowFareSearchRQ" />
+	</bean>
+
+	<!-- Define all the beans here -->
+	<bean id="dcInfoReqJaxbDataFormatter" class="org.apache.camel.model.dataformat.JaxbDataFormat">
+		<property name="contextPath" value="com.skandha.eim.air.jaxb.v1" />
+		<property name="prettyPrint" value="true" />
+		<property name="fragment" value="true" />
+	</bean>
+
+</beans>

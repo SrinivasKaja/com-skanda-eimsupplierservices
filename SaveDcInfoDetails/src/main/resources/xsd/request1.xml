@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AirLowFareSearchRQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xmlns.skandha.com/datatypes/Air/Service/1.0/ request.xsd ">
+  <requesterDetails>
+    <requestId>requestId</requestId>
+    <sessionID>sessionID</sessionID>
+    <appID>appID</appID>
+    <userName>userName</userName>
+    <requesterType>requesterType</requesterType>
+    <pseudoCityCode>pseudoCityCode</pseudoCityCode>
+    <companyName>companyName</companyName>
+  </requesterDetails>
+  <originDestinationInformation>
+    <departureDateTime>departureDateTime</departureDateTime>
+    <arrivalDateTime>arrivalDateTime</arrivalDateTime>
+    <departureWindow>departureWindow</departureWindow>
+    <arrivalWindow>arrivalWindow</arrivalWindow>
+    <originLocation>originLocation</originLocation>
+    <destinationLocation>destinationLocation</destinationLocation>
+    <originAirportCode>originAirportCode</originAirportCode>
+    <destinationAirportCode>destinationAirportCode</destinationAirportCode>
+  </originDestinationInformation>
+  <travelPreferences>
+    <flightTypePref>flightTypePref</flightTypePref>
+    <cabinPref>cabinPref</cabinPref>
+    <eTicketDesired>eTicketDesired</eTicketDesired>
+    <validInterlineTicket>validInterlineTicket</validInterlineTicket>
+    <xoFares>xoFares</xoFares>
+  </travelPreferences>
+  <travelerInfoSummary>
+    <seatsRequested>seatsRequested</seatsRequested>
+    <passengerTypeQuantity>passengerTypeQuantity</passengerTypeQuantity>
+    <pricePriority>pricePriority</pricePriority>
+    <directFlightsPriority>directFlightsPriority</directFlightsPriority>
+    <timePriority>timePriority</timePriority>
+    <vendorPriority>vendorPriority</vendorPriority>
+    <specificPTC_Indicator>specificPTC_Indicator</specificPTC_Indicator>
+  </travelerInfoSummary>
+  <tpaextensions>
+    <requestType>requestType</requestType>
+    <compressResponse>compressResponse</compressResponse>
+    <specifiedLocation>specifiedLocation</specifiedLocation>
+    <alternateLocation>alternateLocation</alternateLocation>
+  </tpaextensions>
+</AirLowFareSearchRQ>
